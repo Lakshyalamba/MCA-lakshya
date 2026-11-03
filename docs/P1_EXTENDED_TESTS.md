@@ -4,16 +4,15 @@ This package adds `testbench/tb_p1_extended.sv` and does **not** replace or edit
 
 ## On Mac
 
-From the existing `dynamic-branch-predictor` project root:
+From the MCA repository root, with Icarus Verilog and Yosys installed:
 
 ```bash
-unzip -o ~/Downloads/p1_extended_tests.zip -d .
-mkdir -p results
-iverilog -g2012 -Wall -s tb_p1_extended -o results/p1_extended_sim \
-  rtl/branch_history_table.v rtl/predictor_2bit.v testbench/tb_p1_extended.sv
-vvp results/p1_extended_sim
+make verify-p1
 surfer results/p1_extended.vcd
 ```
+
+The extended testbench is already tracked in the repository. Do not unzip
+an older standalone test archive over maintained source files.
 
 Expect `ALL EXTENDED P1 CHECKS PASSED (184 checks)` only if every assertion succeeds. A failing assertion calls `$fatal(1, ...)`.
 
@@ -31,3 +30,7 @@ Expect `ALL EXTENDED P1 CHECKS PASSED (184 checks)` only if every assertion succ
 ## Interpretation
 
 A passing directed testbench is evidence for its exercised cases, not formal proof of all possible designs, processor-level behavior, target prediction, or FPGA timing. Keep the original 22-check test and the new extended test as separate evidence.
+
+## Verified Mac evidence
+
+The 184-check extended suite and all three scoreboards passed on 3 November 2026. See `evidence/P1_20261103_185000/`.

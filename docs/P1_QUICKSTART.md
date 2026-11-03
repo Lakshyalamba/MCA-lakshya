@@ -43,15 +43,12 @@ actual passing logs and a machine-generated run summary. Add a readable Surfer
 screenshot manually. Do not commit generated simulator binaries or large
 `.vcd` files by default.
 
-**5. Prepare your GitHub branch:**
+**5. Reuse the published P1 contribution:**
 
-```bash
-git switch -c feature/shubhaang-bht
-# Add and test your actual P1 changes before committing.
-```
+P1's feature branch and PR #1 already exist. Do not recreate the branch,
+rewrite history, or reapply old ZIP files. After PR #1 is merged, a fresh
+checkout of `main` has the verified P1 baseline. Other members should follow
+`docs/TEAM_START_HERE.md` to submit authentically authored PRs from forks.
 
-Do **not** commit under another teammate's identity. The previous attempt
-to push `main` was rejected by GitHub's email-privacy protection; that is a
-separate Git metadata problem, not a Verilog compile or test failure.
 
 For every concept you will need in viva, read `docs/P1_IMPLEMENTATION_NOTES.md`.

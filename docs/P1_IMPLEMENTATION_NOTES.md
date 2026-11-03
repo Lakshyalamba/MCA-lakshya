@@ -201,9 +201,10 @@ Accuracy depends on branch patterns, initialization, table aliasing and
 training. For some alternating traces, a simple 2-bit predictor can do poorly.
 
 **Q13. What have you measured so far?**
-The user's previously shared Mac logs report 22 passing directed checks,
-and generic Yosys synthesis yielding 192 generic cells. Additional scoreboard
-checks and timing/resource characterization still require new runs.
+On 3 November 2026, 22 directed checks, 184 extended checks and 27,729
+scoreboard checks passed (27,935 total). Checked Yosys synthesis recorded 192
+generic cells, including 32 flip-flops, and zero design-check problems.
+No FPGA timing, full-CPU performance or measured CPI is established.
 
 **Q14. What is a meaningful performance comparison?**
 For each trace, count predictions before training, then compare always-NT,
@@ -212,10 +213,9 @@ branch frequency and misprediction penalty; that is not a measured CPU CPI.
 
 ## 8. P1 acceptance / handoff checklist
 
-- [ ] `make verify-p1` returns exit code zero on the Mac (all checks + Yosys).
-- [ ] Record pass counts, tool versions, and full logs from the **current** RTL.
-- [ ] Save a Surfer screenshot showing counter transitions and reset.
-- [ ] Review P3 use of `lookup_pc` versus `update_pc` for outcome leakage.
-- [ ] Commit **only your actual P1 work** to `feature/shubhaang-bht`.
-- [ ] Include a clear caveat that BTB/flush, video, and CPU integration belong
-      to later team deliverables.
+- [x] `make verify-p1` passed with Mac simulator and checked synthesis.
+- [x] Real pass counts, tools and logs saved under `evidence/P1_20261103_185000/`.
+- [ ] Commit an actual Surfer waveform screenshot (not yet in this repository).
+- [ ] Review P3's future use of distinct lookup/update PCs to avoid outcome leakage.
+- [x] Published P1 verification as PR #1 on `feature/shubhaang-bht`.
+- [x] Clearly distinguished P1 evidence from pending BTB, recovery, video and CPU integration.

@@ -1,0 +1,39 @@
+name: P1 Verilog regression
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Icarus and Yosys
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iverilog yosys
+      - name: Validate manifest and script syntax
+        run: |
+          python3 -m json.tool docs/P1_FILE_MANIFEST.json >/dev/null
+          bash -n scripts/capture_p1_evidence.sh
+      - name: P1 verification and checked synthesis
+        run: make verify-p1
+      - name: Regression comparison demo
+        run: |
+          make demo
+          grep -Fx 'TOTAL=32 BASE_CORRECT=10 ONE_CORRECT=12 TWO_CORRECT=15' results/simulation.log
+      - name: Upload logs if a step fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-regression-logs
+          path: results/*.log
+          if-no-files-found: ignore

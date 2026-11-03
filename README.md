@@ -1,9 +1,9 @@
 # MCA — Dynamic Branch Prediction Unit (Project 5)
 
-**Team:** Shubhaang (leader / P1), Tanish (P2), Tanmay (P3), Vansh (P4), Lakshya (P5).
-**Phase I deadline:** 16 November 2026, 11:59 PM IST.
-**Phase I rubric:** IEEE report (10), prototype video under five minutes (15), GitHub (5).
-**Phase II:** final IEEE report, continuing Git history and interview (70% of overall grading).
+- **Team:** Shubhaang (leader / P1), Tanish (P2), Tanmay (P3), Vansh (P4), Lakshya (P5).
+- **Phase I deadline:** 16 November 2026, 11:59 PM IST.
+- **Phase I rubric:** IEEE report (10), prototype video under five minutes (15), GitHub (5).
+- **Phase II:** final IEEE report, continuing Git history and interview (70% of overall grading).
 
 ## Scope
 
@@ -64,3 +64,9 @@ including all 8 direction/state transitions per entry, randomized updates,
 reset priority, aliasing and concurrent lookup/update PCs.
 The two existing P1 RTL files were intentionally **left unchanged** from the
 22-check Mac-tested starting point. Extended tests and independent scoreboards **passed on Mac on 3 November 2026**.
+
+## Faculty alignment and team onboarding
+
+- [Faculty Project 5 and Phase I/II checklist](docs/FACULTY_REQUIREMENTS.md): completed evidence versus outstanding deliverables.
+- [Start here for all teammates](docs/TEAM_START_HERE.md): forking, cloning, assigned branches and integration requirements; no collaborator invitation required.
+- P1 is unit-verified. P2/P3 hardware integration, BEQ/BNE traces, target-specific timing, IEEE report and video are still pending. This is not a completed CPU.
