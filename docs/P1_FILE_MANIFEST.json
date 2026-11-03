@@ -1,0 +1,14 @@
+{
+  "generated": "2026-11-03",
+  "scope": "P1 only; RTL unchanged",
+  "verification": "new tests and checked synthesis NOT executed here; requires Mac",
+  "files": {
+    "Makefile": "e744e2bb1ae1ee4e7a7488b18667a27037c327ee2442ff77994e3f85ac7be59a",
+    "README.md": "8e40ced825ed12d0fa4f1aaa302a0e1a9e5e8bb67ef7090c296539bb852f2b5c",
+    "testbench/tb_p1_scoreboard.sv": "a461d313f10db260f40cd8cf4341ccfb6f3c3dd82b70ace76b466f09344b495b",
+    "docs/P1_IMPLEMENTATION_NOTES.md": "57026e7e17fe645dfa3555eea769bbbd860afb597588d3a461612d02450ee618",
+    "docs/P1_QUICKSTART.md": "179ebb881a010c45521c5039d119b921f9257b42e988c3559675b361d5fb57c9",
+    "scripts/capture_p1_evidence.sh": "1432c42fe1a04a8ad5906511ae865e00393ee9b0a2650d7f76efbe9f47937241",
+    "evidence/P1_EVIDENCE_STATUS.md": "f10a34886e319c38bbbc8fcd32ba7d973da1fa97d7ea42a5ff35355225a6b13e"
+  }
+}

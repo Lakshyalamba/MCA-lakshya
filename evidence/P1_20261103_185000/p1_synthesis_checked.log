@@ -1,0 +1,1746 @@
+
+-- Running command `read_verilog rtl/branch_history_table.v rtl/predictor_2bit.v; synth -top predictor_2bit; check -assert; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/branch_history_table.v
+Parsing Verilog input from `rtl/branch_history_table.v' to AST representation.
+Generating RTLIL representation for module `\branch_history_table'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/predictor_2bit.v
+Parsing Verilog input from `rtl/predictor_2bit.v' to AST representation.
+Generating RTLIL representation for module `\predictor_2bit'.
+Successfully finished Verilog frontend.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \predictor_2bit
+Used module:     \branch_history_table
+Parameter \INDEX_BITS = 4
+
+3.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\branch_history_table'.
+Parameter \INDEX_BITS = 4
+Generating RTLIL representation for module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+
+3.1.3. Analyzing design hierarchy..
+Top module:  \predictor_2bit
+Used module:     $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+3.1.4. Analyzing design hierarchy..
+Top module:  \predictor_2bit
+Used module:     $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+Removing unused module `\branch_history_table'.
+Removed 1 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$rtl/branch_history_table.v:26$111 in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 23 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+     1/38: $4$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$179
+     2/38: $4$memwr$\counters$rtl/branch_history_table.v:35$109_DATA[1:0]$178
+     3/38: $4$memwr$\counters$rtl/branch_history_table.v:35$109_ADDR[3:0]$177
+     4/38: $3$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$167
+     5/38: $3$memwr$\counters$rtl/branch_history_table.v:33$108_DATA[1:0]$166
+     6/38: $3$memwr$\counters$rtl/branch_history_table.v:33$108_ADDR[3:0]$165
+     7/38: $3$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$170
+     8/38: $3$memwr$\counters$rtl/branch_history_table.v:35$109_DATA[1:0]$169
+     9/38: $3$memwr$\counters$rtl/branch_history_table.v:35$109_ADDR[3:0]$168
+    10/38: $2$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$161
+    11/38: $2$memwr$\counters$rtl/branch_history_table.v:35$109_DATA[1:0]$160
+    12/38: $2$memwr$\counters$rtl/branch_history_table.v:35$109_ADDR[3:0]$159
+    13/38: $2$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$158
+    14/38: $2$memwr$\counters$rtl/branch_history_table.v:33$108_DATA[1:0]$157
+    15/38: $2$memwr$\counters$rtl/branch_history_table.v:33$108_ADDR[3:0]$156
+    16/38: $1\i[31:0]
+    17/38: $1$memwr$\counters$rtl/branch_history_table.v:29$107_EN[1:0]$149
+    18/38: $1$memwr$\counters$rtl/branch_history_table.v:29$106_EN[1:0]$148
+    19/38: $1$memwr$\counters$rtl/branch_history_table.v:29$105_EN[1:0]$147
+    20/38: $1$memwr$\counters$rtl/branch_history_table.v:29$104_EN[1:0]$146
+    21/38: $1$memwr$\counters$rtl/branch_history_table.v:29$103_EN[1:0]$145
+    22/38: $1$memwr$\counters$rtl/branch_history_table.v:29$102_EN[1:0]$144
+    23/38: $1$memwr$\counters$rtl/branch_history_table.v:29$101_EN[1:0]$143
+    24/38: $1$memwr$\counters$rtl/branch_history_table.v:29$100_EN[1:0]$142
+    25/38: $1$memwr$\counters$rtl/branch_history_table.v:29$99_EN[1:0]$141
+    26/38: $1$memwr$\counters$rtl/branch_history_table.v:29$98_EN[1:0]$140
+    27/38: $1$memwr$\counters$rtl/branch_history_table.v:29$97_EN[1:0]$139
+    28/38: $1$memwr$\counters$rtl/branch_history_table.v:29$96_EN[1:0]$138
+    29/38: $1$memwr$\counters$rtl/branch_history_table.v:29$95_EN[1:0]$137
+    30/38: $1$memwr$\counters$rtl/branch_history_table.v:29$94_EN[1:0]$136
+    31/38: $1$memwr$\counters$rtl/branch_history_table.v:29$93_EN[1:0]$135
+    32/38: $1$memwr$\counters$rtl/branch_history_table.v:29$92_EN[1:0]$134
+    33/38: $1$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$155
+    34/38: $1$memwr$\counters$rtl/branch_history_table.v:35$109_DATA[1:0]$154
+    35/38: $1$memwr$\counters$rtl/branch_history_table.v:35$109_ADDR[3:0]$153
+    36/38: $1$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$152
+    37/38: $1$memwr$\counters$rtl/branch_history_table.v:33$108_DATA[1:0]$151
+    38/38: $1$memwr$\counters$rtl/branch_history_table.v:33$108_ADDR[3:0]$150
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.\i' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$377' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$92_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$378' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$93_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$379' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$94_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$380' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$95_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$381' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$96_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$382' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$97_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$383' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$98_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$384' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$99_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$385' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$100_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$386' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$101_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$387' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$102_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$388' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$103_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$389' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$104_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$390' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$105_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$391' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$106_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$392' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:29$107_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$393' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:33$108_ADDR' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$394' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:33$108_DATA' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$395' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:33$108_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$396' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:35$109_ADDR' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$397' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:35$109_DATA' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$398' with positive edge clock.
+Creating register for signal `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$memwr$\counters$rtl/branch_history_table.v:35$109_EN' using process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+  created $dff cell `$procdff$399' with positive edge clock.
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+Removing empty process `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$proc$rtl/branch_history_table.v:26$111'.
+Cleaned up 4 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~1 debug messages>
+
+3.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.4. Executing CHECK pass (checking for obvious problems).
+Checking module predictor_2bit...
+Checking module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100...
+Found and reported 0 problems.
+
+3.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 24 unused cells and 151 unused wires.
+<suppressed ~26 debug messages>
+
+3.6. Executing OPT pass (performing simple optimizations).
+
+3.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 94 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 91 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+3.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$306.
+    dead port 1/2 on $mux $procmux$300.
+    dead port 1/2 on $mux $procmux$294.
+    dead port 1/2 on $mux $procmux$288.
+    dead port 1/2 on $mux $procmux$282.
+    dead port 1/2 on $mux $procmux$276.
+    dead port 1/2 on $mux $procmux$270.
+    dead port 2/2 on $mux $procmux$267.
+    dead port 1/2 on $mux $procmux$261.
+    dead port 2/2 on $mux $procmux$258.
+    dead port 1/2 on $mux $procmux$252.
+    dead port 2/2 on $mux $procmux$249.
+    dead port 1/2 on $mux $procmux$243.
+    dead port 2/2 on $mux $procmux$240.
+    dead port 1/2 on $mux $procmux$234.
+    dead port 2/2 on $mux $procmux$231.
+    dead port 1/2 on $mux $procmux$225.
+    dead port 2/2 on $mux $procmux$222.
+    dead port 1/2 on $mux $procmux$216.
+    dead port 2/2 on $mux $procmux$213.
+    dead port 1/2 on $mux $procmux$211.
+    dead port 1/2 on $mux $procmux$204.
+    dead port 2/2 on $mux $procmux$201.
+    dead port 1/2 on $mux $procmux$199.
+    dead port 1/2 on $mux $procmux$192.
+    dead port 2/2 on $mux $procmux$189.
+    dead port 1/2 on $mux $procmux$187.
+Removed 27 multiplexer ports.
+<suppressed ~86 debug messages>
+
+3.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+    Consolidated identical input bits for $mux cell $procmux$336:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$99_EN[1:0]$119
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$99_EN[1:0]$119 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$99_EN[1:0]$119 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$99_EN[1:0]$119 [0]
+    Consolidated identical input bits for $mux cell $procmux$333:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$100_EN[1:0]$120
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$100_EN[1:0]$120 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$100_EN[1:0]$120 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$100_EN[1:0]$120 [0]
+    Consolidated identical input bits for $mux cell $procmux$330:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$101_EN[1:0]$121
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$101_EN[1:0]$121 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$101_EN[1:0]$121 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$101_EN[1:0]$121 [0]
+    Consolidated identical input bits for $mux cell $procmux$327:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$102_EN[1:0]$122
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$102_EN[1:0]$122 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$102_EN[1:0]$122 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$102_EN[1:0]$122 [0]
+    Consolidated identical input bits for $mux cell $procmux$324:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$103_EN[1:0]$123
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$103_EN[1:0]$123 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$103_EN[1:0]$123 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$103_EN[1:0]$123 [0]
+    Consolidated identical input bits for $mux cell $procmux$321:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$104_EN[1:0]$124
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$104_EN[1:0]$124 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$104_EN[1:0]$124 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$104_EN[1:0]$124 [0]
+    Consolidated identical input bits for $mux cell $procmux$318:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$105_EN[1:0]$125
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$105_EN[1:0]$125 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$105_EN[1:0]$125 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$105_EN[1:0]$125 [0]
+    Consolidated identical input bits for $mux cell $procmux$315:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$106_EN[1:0]$126
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$106_EN[1:0]$126 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$106_EN[1:0]$126 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$106_EN[1:0]$126 [0]
+    Consolidated identical input bits for $mux cell $procmux$312:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$107_EN[1:0]$127
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$107_EN[1:0]$127 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$107_EN[1:0]$127 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$107_EN[1:0]$127 [0]
+    Consolidated identical input bits for $mux cell $procmux$220:
+      Old ports: A=2'00, B=2'11, Y=$procmux$220_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$220_Y [0]
+      New connections: $procmux$220_Y [1] = $procmux$220_Y [0]
+    Consolidated identical input bits for $mux cell $procmux$357:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$92_EN[1:0]$112
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$92_EN[1:0]$112 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$92_EN[1:0]$112 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$92_EN[1:0]$112 [0]
+    Consolidated identical input bits for $mux cell $procmux$354:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$93_EN[1:0]$113
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$93_EN[1:0]$113 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$93_EN[1:0]$113 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$93_EN[1:0]$113 [0]
+    Consolidated identical input bits for $mux cell $procmux$351:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$94_EN[1:0]$114
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$94_EN[1:0]$114 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$94_EN[1:0]$114 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$94_EN[1:0]$114 [0]
+    Consolidated identical input bits for $mux cell $procmux$348:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$95_EN[1:0]$115
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$95_EN[1:0]$115 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$95_EN[1:0]$115 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$95_EN[1:0]$115 [0]
+    Consolidated identical input bits for $mux cell $procmux$345:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$96_EN[1:0]$116
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$96_EN[1:0]$116 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$96_EN[1:0]$116 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$96_EN[1:0]$116 [0]
+    Consolidated identical input bits for $mux cell $procmux$342:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$97_EN[1:0]$117
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$97_EN[1:0]$117 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$97_EN[1:0]$117 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$97_EN[1:0]$117 [0]
+    Consolidated identical input bits for $mux cell $procmux$339:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$98_EN[1:0]$118
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\counters$rtl/branch_history_table.v:29$98_EN[1:0]$118 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:29$98_EN[1:0]$118 [1] = $0$memwr$\counters$rtl/branch_history_table.v:29$98_EN[1:0]$118 [0]
+    Consolidated identical input bits for $mux cell $procmux$184:
+      Old ports: A=2'00, B=2'11, Y=$procmux$184_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$184_Y [0]
+      New connections: $procmux$184_Y [1] = $procmux$184_Y [0]
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+    Consolidated identical input bits for $mux cell $procmux$291:
+      Old ports: A=2'00, B=$3$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$167, Y=$procmux$291_Y
+      New ports: A=1'0, B=$procmux$220_Y [0], Y=$procmux$291_Y [0]
+      New connections: $procmux$291_Y [1] = $procmux$291_Y [0]
+    Consolidated identical input bits for $mux cell $procmux$247:
+      Old ports: A=$4$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$179, B=2'00, Y=$procmux$247_Y
+      New ports: A=$procmux$184_Y [0], B=1'0, Y=$procmux$247_Y [0]
+      New connections: $procmux$247_Y [1] = $procmux$247_Y [0]
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+    Consolidated identical input bits for $mux cell $procmux$273:
+      Old ports: A=2'00, B=$3$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$170, Y=$procmux$273_Y
+      New ports: A=1'0, B=$procmux$247_Y [0], Y=$procmux$273_Y [0]
+      New connections: $procmux$273_Y [1] = $procmux$273_Y [0]
+    Consolidated identical input bits for $mux cell $procmux$369:
+      Old ports: A=$2$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$158, B=2'00, Y=$0$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$130
+      New ports: A=$procmux$291_Y [0], B=1'0, Y=$0$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$130 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$130 [1] = $0$memwr$\counters$rtl/branch_history_table.v:33$108_EN[1:0]$130 [0]
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+    Consolidated identical input bits for $mux cell $procmux$360:
+      Old ports: A=$2$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$161, B=2'00, Y=$0$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$133
+      New ports: A=$procmux$273_Y [0], B=1'0, Y=$0$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$133 [0]
+      New connections: $0$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$133 [1] = $0$memwr$\counters$rtl/branch_history_table.v:35$109_EN[1:0]$133 [0]
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 23 changes.
+
+3.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 64 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+<suppressed ~45 debug messages>
+Removed a total of 15 cells.
+
+3.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 0 unused cells and 45 unused wires.
+<suppressed ~1 debug messages>
+
+3.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+3.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.7. Executing FSM pass (extract and optimize FSM).
+
+3.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.8. Executing OPT pass (performing simple optimizations).
+
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.8.9. Finished fast OPT passes. (There is nothing left to do.)
+
+3.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$406 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$407 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$408 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$409 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$410 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$411 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$412 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$413 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$414 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$415 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$403 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$404 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$405 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$400 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$401 (counters).
+Removed top 28 address bits (of 32) from memory init port $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$auto$proc_memwr.cc:45:proc_memwr$402 (counters).
+Removed top 1 bits (of 2) from port B of cell $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$add$rtl/branch_history_table.v:33$172 ($add).
+Removed top 1 bits (of 2) from port B of cell $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.$sub$rtl/branch_history_table.v:35$181 ($sub).
+
+3.10. Executing PEEPOPT pass (run peephole optimizers).
+
+3.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module predictor_2bit:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100:
+  creating $macc model for $sub$rtl/branch_history_table.v:35$181 ($sub).
+  creating $macc model for $add$rtl/branch_history_table.v:33$172 ($add).
+  creating $alu model for $macc $add$rtl/branch_history_table.v:33$172.
+  creating $alu model for $macc $sub$rtl/branch_history_table.v:35$181.
+  creating $alu cell for $sub$rtl/branch_history_table.v:35$181: $auto$alumacc.cc:578:replace_alu$418
+  creating $alu cell for $add$rtl/branch_history_table.v:33$172: $auto$alumacc.cc:578:replace_alu$421
+  created 2 $alu and 0 $macc cells.
+
+3.13. Executing SHARE pass (SAT-based resource sharing).
+
+3.14. Executing OPT pass (performing simple optimizations).
+
+3.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+3.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 49 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.14.9. Finished fast OPT passes. (There is nothing left to do.)
+
+3.15. Executing MEMORY pass.
+
+3.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+3.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 120 transformations.
+
+3.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 0.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 1.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 2.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 3.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 4.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 5.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 6.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 7.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 8.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 9.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 10.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 11.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 12.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 13.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 14.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 15.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 16.
+  Analyzing $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters write port 17.
+
+3.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+3.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\counters'[0] in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100':
+    no output FF found.
+Checking read port `\counters'[1] in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100':
+    no output FF found.
+Checking read port address `\counters'[0] in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100':
+    no address FF found.
+Checking read port address `\counters'[1] in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100':
+    no address FF found.
+
+3.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+Consolidating read ports of memory $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters by address:
+Consolidating write ports of memory $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters by address:
+  Merging ports 0, 1 (address 4'0000).
+  Merging ports 0, 2 (address 4'0000).
+  Merging ports 0, 3 (address 4'0000).
+  Merging ports 0, 4 (address 4'0000).
+  Merging ports 0, 5 (address 4'0000).
+  Merging ports 0, 6 (address 4'0000).
+  Merging ports 0, 7 (address 4'0000).
+  Merging ports 0, 8 (address 4'0000).
+  Merging ports 10, 11 (address 4'1010).
+  Merging ports 12, 13 (address 4'1100).
+  Merging ports 12, 14 (address 4'1100).
+  Merging ports 12, 15 (address 4'1100).
+  Merging ports 16, 17 (address \update_pc [5:2]).
+Consolidating write ports of memory $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters by address:
+  Merging ports 1, 2 (address 4'1001).
+  Merging ports 1, 3 (address 4'1000).
+Consolidating write ports of memory $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters by address:
+Consolidating write ports of memory $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.counters using sat-based resource sharing:
+
+3.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+3.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 7 unused cells and 7 unused wires.
+<suppressed ~8 debug messages>
+
+3.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.17. Executing OPT pass (performing simple optimizations).
+
+3.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~12 debug messages>
+
+3.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 15 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 0 unused cells and 10 unused wires.
+<suppressed ~1 debug messages>
+
+3.17.5. Finished fast OPT passes.
+
+3.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \counters in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100:
+  created 16 $dff cells and 0 static cells of width 2.
+  read interface: 0 $dff and 30 $mux cells.
+  write interface: 48 write mux blocks.
+
+3.19. Executing OPT pass (performing simple optimizations).
+
+3.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~59 debug messages>
+
+3.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 136 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~104 debug messages>
+
+3.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 136 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $auto$memory_share.cc:274:consolidate_wr_by_addr$428 in front of them:
+        $auto$alumacc.cc:578:replace_alu$418
+        $auto$alumacc.cc:578:replace_alu$421
+
+3.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 0 unused cells and 109 unused wires.
+<suppressed ~1 debug messages>
+
+3.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~2 debug messages>
+
+3.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~88 debug messages>
+
+3.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+    Consolidated identical input bits for $mux cell $auto$opt_share.cc:244:merge_operators$819:
+      Old ports: A=2'11, B=2'01, Y=$auto$rtlil.cc:3381:Mux$820
+      New ports: A=1'1, B=1'0, Y=$auto$rtlil.cc:3381:Mux$820 [1]
+      New connections: $auto$rtlil.cc:3381:Mux$820 [0] = 1'1
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 1 changes.
+
+3.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 135 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.19.14. Executing OPT_SHARE pass.
+
+3.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\counters[0]$432 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[0][2][0]$y$583, Q = \counters[0]).
+Adding EN signal on $memory\counters[1]$434 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[1][2][0]$y$601, Q = \counters[1]).
+Adding EN signal on $memory\counters[2]$436 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[2][2][0]$y$619, Q = \counters[2]).
+Adding EN signal on $memory\counters[3]$438 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[3][2][0]$y$635, Q = \counters[3]).
+Adding EN signal on $memory\counters[4]$440 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[4][2][0]$y$653, Q = \counters[4]).
+Adding EN signal on $memory\counters[5]$442 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[5][2][0]$y$667, Q = \counters[5]).
+Adding EN signal on $memory\counters[6]$444 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[6][2][0]$y$681, Q = \counters[6]).
+Adding EN signal on $memory\counters[7]$446 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[7][2][0]$y$695, Q = \counters[7]).
+Adding EN signal on $memory\counters[8]$448 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[8][2][0]$y$715, Q = \counters[8]).
+Adding EN signal on $memory\counters[9]$450 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[9][2][0]$y$729, Q = \counters[9]).
+Adding EN signal on $memory\counters[10]$452 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[10][2][0]$y$743, Q = \counters[10]).
+Adding EN signal on $memory\counters[11]$454 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[11][2][0]$y$757, Q = \counters[11]).
+Adding EN signal on $memory\counters[12]$456 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[12][2][0]$y$773, Q = \counters[12]).
+Adding EN signal on $memory\counters[13]$458 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[13][2][0]$y$787, Q = \counters[13]).
+Adding EN signal on $memory\counters[14]$460 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[14][2][0]$y$801, Q = \counters[14]).
+Adding EN signal on $memory\counters[15]$462 ($dff) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $memory\counters$wrmux[15][2][0]$y$815, Q = \counters[15]).
+
+3.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+3.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~33 debug messages>
+
+3.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~70 debug messages>
+
+3.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 135 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.19.22. Executing OPT_SHARE pass.
+
+3.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:337:slice$823 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[0], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$826 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[1], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$829 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[2], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$832 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[3], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$835 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[4], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$838 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[5], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$841 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[6], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$844 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[7], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$847 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[8], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$850 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[9], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$853 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[10], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$856 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[11], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$859 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[12], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$862 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[13], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$865 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[14], rval = 2'01).
+Adding SRST signal on $auto$ff.cc:337:slice$868 ($dffe) from module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 (D = $auto$opt_share.cc:222:merge_operators$818, Q = \counters[15], rval = 2'01).
+
+3.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 16 unused cells and 32 unused wires.
+<suppressed ~17 debug messages>
+
+3.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.19.26. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.19.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \predictor_2bit..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+3.19.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \predictor_2bit.
+  Optimizing cells in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+Performed a total of 0 changes.
+
+3.19.29. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 119 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Removed a total of 0 cells.
+
+3.19.30. Executing OPT_SHARE pass.
+
+3.19.31. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.19.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+
+3.19.33. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.19.34. Finished fast OPT passes. (There is nothing left to do.)
+
+3.20. Executing TECHMAP pass (map to technology primitives).
+
+3.20.1. Executing Verilog-2005 frontend: /opt/homebrew/Cellar/yosys/0.70/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/Cellar/yosys/0.70/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdffce.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+No more expansions possible.
+<suppressed ~326 debug messages>
+
+3.21. Executing OPT pass (performing simple optimizations).
+
+3.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+<suppressed ~18 debug messages>
+
+3.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 172 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 171 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+3.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 4 unused cells and 64 unused wires.
+<suppressed ~5 debug messages>
+
+3.21.5. Finished fast OPT passes.
+
+3.22. Executing ABC pass (technology mapping using ABC).
+
+3.22.1. Summary of detected clock domains:
+  21 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$869, arst={ }, srst=!$memory\counters$wren[15][2][0]$y$813
+  8 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$866, arst={ }, srst=!$memory\counters$wren[14][2][0]$y$799
+  9 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$863, arst={ }, srst=!$memory\counters$wren[13][2][0]$y$785
+  8 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$860, arst={ }, srst=!$memory\counters$wren[12][2][0]$y$771
+  7 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$857, arst={ }, srst=!$memory\counters$wren[11][2][0]$y$755
+  10 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$854, arst={ }, srst=!$memory\counters$wren[10][2][0]$y$741
+  8 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$851, arst={ }, srst=!$memory\counters$wren[9][2][0]$y$727
+  9 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$848, arst={ }, srst=!$memory\counters$wren[8][2][0]$y$713
+  7 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$845, arst={ }, srst=!$memory\counters$wren[7][2][0]$y$693
+  8 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$842, arst={ }, srst=!$memory\counters$wren[6][2][0]$y$679
+  10 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$839, arst={ }, srst=!$memory\counters$wren[5][2][0]$y$665
+  9 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$836, arst={ }, srst=!$memory\counters$wren[4][2][0]$y$651
+  8 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$833, arst={ }, srst=!$memory\counters$wren[3][2][0]$y$633
+  11 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$830, arst={ }, srst=!$memory\counters$wren[2][2][0]$y$617
+  10 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$827, arst={ }, srst=!$memory\counters$wren[1][2][0]$y$599
+  24 cells in clk=\clk, en=$auto$simple.cc:193:make_patterns_logic$824, arst={ }, srst=!$memory\counters$wren[0][2][0]$y$581
+
+3.22.2. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$869, synchronously reset by !$memory\counters$wren[15][2][0]$y$813
+
+3.22.3. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$866, synchronously reset by !$memory\counters$wren[14][2][0]$y$799
+
+3.22.4. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$863, synchronously reset by !$memory\counters$wren[13][2][0]$y$785
+
+3.22.5. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$860, synchronously reset by !$memory\counters$wren[12][2][0]$y$771
+
+3.22.6. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$857, synchronously reset by !$memory\counters$wren[11][2][0]$y$755
+
+3.22.7. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$854, synchronously reset by !$memory\counters$wren[10][2][0]$y$741
+
+3.22.8. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$851, synchronously reset by !$memory\counters$wren[9][2][0]$y$727
+
+3.22.9. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$848, synchronously reset by !$memory\counters$wren[8][2][0]$y$713
+
+3.22.10. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$845, synchronously reset by !$memory\counters$wren[7][2][0]$y$693
+
+3.22.11. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$842, synchronously reset by !$memory\counters$wren[6][2][0]$y$679
+
+3.22.12. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$839, synchronously reset by !$memory\counters$wren[5][2][0]$y$665
+
+3.22.13. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$836, synchronously reset by !$memory\counters$wren[4][2][0]$y$651
+
+3.22.14. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$833, synchronously reset by !$memory\counters$wren[3][2][0]$y$633
+
+3.22.15. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$830, synchronously reset by !$memory\counters$wren[2][2][0]$y$617
+
+3.22.16. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$827, synchronously reset by !$memory\counters$wren[1][2][0]$y$599
+
+3.22.17. Extracting gate netlist of module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:193:make_patterns_logic$824, synchronously reset by !$memory\counters$wren[0][2][0]$y$581
+
+3.22.18. Summary of detected clock domains:
+  1 cells in clk={ }, en={ }, arst={ }, srst={ }
+
+3.22.19. Extracting gate netlist of module `\predictor_2bit' to `<abc-temp-dir>/input.blif'..
+No matching clock domain found. Not extracting any FF cells.
+
+3.22.19.1. Executed ABC.
+Extracted 19 gates and 41 wires to a netlist network with 21 inputs and 7 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        6
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        6
+ABC RESULTS:              NAND cells:        5
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        3
+ABC RESULTS:             ORNOT cells:        2
+ABC RESULTS:        internal signals:       13
+ABC RESULTS:           input signals:       21
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 6 gates and 16 wires to a netlist network with 10 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 7 gates and 19 wires to a netlist network with 12 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:        3
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 6 gates and 15 wires to a netlist network with 9 inputs and 5 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 8 gates and 22 wires to a netlist network with 14 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:        3
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:        4
+ABC RESULTS:           input signals:       14
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 6 gates and 16 wires to a netlist network with 10 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 7 gates and 16 wires to a netlist network with 9 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 6 gates and 16 wires to a netlist network with 10 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 8 gates and 22 wires to a netlist network with 14 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:        2
+ABC RESULTS:        internal signals:        4
+ABC RESULTS:           input signals:       14
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 7 gates and 16 wires to a netlist network with 9 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 6 gates and 14 wires to a netlist network with 8 inputs and 5 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 9 gates and 21 wires to a netlist network with 12 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:        3
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 8 gates and 18 wires to a netlist network with 10 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 22 gates and 47 wires to a netlist network with 24 inputs and 8 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.22.19.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       11
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:               MUX cells:        5
+ABC RESULTS:              NAND cells:        4
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:                OR cells:        5
+ABC RESULTS:             ORNOT cells:        2
+ABC RESULTS:        internal signals:       15
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+3.22.19.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+Removing global temp directory.
+
+3.23. Executing OPT pass (performing simple optimizations).
+
+3.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module predictor_2bit.
+Optimizing module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100.
+
+3.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\predictor_2bit'.
+Computing hashes of 1 cells of `\predictor_2bit'.
+Finding duplicate cells in `\predictor_2bit'.
+Finding identical cells in module `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 202 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Computing hashes of 192 cells of `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+Finding duplicate cells in `$paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100'.
+<suppressed ~30 debug messages>
+Removed a total of 10 cells.
+
+3.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \predictor_2bit..
+Finding unused cells or wires in module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100..
+Removed 0 unused cells and 305 unused wires.
+<suppressed ~1 debug messages>
+
+3.23.5. Finished fast OPT passes.
+
+3.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `predictor_2bit'. Setting top module to predictor_2bit.
+
+3.24.1. Analyzing design hierarchy..
+Top module:  \predictor_2bit
+Used module:     $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+3.24.2. Analyzing design hierarchy..
+Top module:  \predictor_2bit
+Used module:     $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+Removed 0 unused modules.
+
+3.25. Printing statistics.
+
+=== predictor_2bit ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        8 wires
+       71 wire bits
+        8 public wires
+       71 public wire bits
+        8 ports
+       71 port bits
+        1 submodules
+        1   $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+=== $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      181 wires
+      270 wire bits
+       25 public wires
+      110 public wire bits
+        7 ports
+       70 port bits
+      192 cells
+        9   $_ANDNOT_
+       44   $_AND_
+       43   $_MUX_
+       18   $_NAND_
+        7   $_NOR_
+        5   $_NOT_
+        9   $_ORNOT_
+       25   $_OR_
+       16   $_SDFFCE_PN0P_
+       16   $_SDFFCE_PN1P_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      192 predictor_2bit
+      192 $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+        +----------Count including submodules.
+        | 
+      189 wires
+      341 wire bits
+       33 public wires
+      181 public wire bits
+       15 ports
+      141 port bits
+        - memories
+        - memory bits
+        - processes
+      192 cells
+        9   $_ANDNOT_
+       44   $_AND_
+       43   $_MUX_
+       18   $_NAND_
+        7   $_NOR_
+        5   $_NOT_
+        9   $_ORNOT_
+       25   $_OR_
+       16   $_SDFFCE_PN0P_
+       16   $_SDFFCE_PN1P_
+        1 submodules
+        1   $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+3.26. Executing CHECK pass (checking for obvious problems).
+Checking module predictor_2bit...
+Checking module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100...
+Found and reported 0 problems.
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module predictor_2bit...
+Checking module $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100...
+Found and reported 0 problems.
+
+5. Printing statistics.
+
+=== predictor_2bit ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        8 wires
+       71 wire bits
+        8 public wires
+       71 public wire bits
+        8 ports
+       71 port bits
+        1 submodules
+        1   $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+=== $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      181 wires
+      270 wire bits
+       25 public wires
+      110 public wire bits
+        7 ports
+       70 port bits
+      192 cells
+        9   $_ANDNOT_
+       44   $_AND_
+       43   $_MUX_
+       18   $_NAND_
+        7   $_NOR_
+        5   $_NOT_
+        9   $_ORNOT_
+       25   $_OR_
+       16   $_SDFFCE_PN0P_
+       16   $_SDFFCE_PN1P_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      192 predictor_2bit
+      192 $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+
+        +----------Count including submodules.
+        | 
+      189 wires
+      341 wire bits
+       33 public wires
+      181 public wire bits
+       15 ports
+      141 port bits
+        - memories
+        - memory bits
+        - processes
+      192 cells
+        9   $_ANDNOT_
+       44   $_AND_
+       43   $_MUX_
+       18   $_NAND_
+        7   $_NOR_
+        5   $_NOT_
+        9   $_ORNOT_
+       25   $_OR_
+       16   $_SDFFCE_PN0P_
+       16   $_SDFFCE_PN1P_
+        1 submodules
+        1   $paramod\branch_history_table\INDEX_BITS=s32'00000000000000000000000000000100
+

@@ -14,7 +14,7 @@ This is a **Verilog branch predictor prototype** with a 2-bit Branch History Tab
 - `make test-p1`: 22/22 directed checks passed.
 - `make synth-p1`: generic Yosys synthesis succeeded; 192 generic cells in the reported hierarchy, 0 check problems.
 - `make demo`: one synthetic 32-branch trace; correct predictions 10 (always NT), 12 (1-bit), 15 (2-bit).
-- `make test-p1-extended` is supplied but its full run on the team's Mac is **not yet confirmed**.
+- `make test-p1-extended` is supplied but its full run on the team's Mac is **not yet confirmed**. A new independent scoreboard also needs a Mac run.
 - P2 BTB, P3 recovery, broader P4 tests, P5 full metrics and integrated top are **pending team implementation**.
 
 ## Mac setup
@@ -24,6 +24,8 @@ Install Icarus Verilog, Yosys and Surfer (Homebrew). In the project root:
 ```bash
 make test-p1
 make test-p1-extended
+make test-p1-scoreboard
+make verify-p1
 make demo
 make synth-p1
 surfer results/p1_bht.vcd
@@ -50,3 +52,13 @@ Read `docs/INTERFACES.md` first, then `docs/PROJECT_PLAN.md`, then your own guid
 - Put a public/accessible video link in `video/DEMO_LINK.md` and README; don't commit a large MP4 to Git.
 - Confirm every team member appears in the video and has substantive commits and a report contribution.
 - Submission form: https://docs.google.com/forms/d/e/1FAIpQLSc6Cx8OrOQLGj_X2ZMkyG5jc8mokq36mGRq2x8jGRNV1sbegA/viewform
+
+## P1 independent verification handoff (3 Nov 2026)
+
+See [P1 quickstart](docs/P1_QUICKSTART.md) and
+[P1 implementation/viva notes](docs/P1_IMPLEMENTATION_NOTES.md).
+The additional reference scoreboard tests `INDEX_BITS=2`, `4`, and `5`,
+including all 8 direction/state transitions per entry, randomized updates,
+reset priority, aliasing and concurrent lookup/update PCs.
+The two existing P1 RTL files were intentionally **left unchanged** from the
+22-check Mac-tested starting point. New tests are **not yet verified on Mac**.
