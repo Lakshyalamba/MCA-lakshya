@@ -1,9 +1,9 @@
 # MCA — Dynamic Branch Prediction Unit (Project 5)
 
-**Team:** Shubhaang (leader / P1), Tanish (P2), Tanmay (P3), Vansh (P4), Lakshya (P5).  
-**Phase I deadline:** 16 November 2026, 11:59 PM IST.  
-**Phase I rubric:** IEEE report (10), prototype video under five minutes (15), GitHub (5).  
-**Phase II:** final IEEE report, continuing Git history and interview (70% of overall grading).
+- **Team:** Shubhaang (leader / P1), Tanish (P2), Tanmay (P3), Vansh (P4), Lakshya (P5).
+- **Phase I deadline:** 16 November 2026, 11:59 PM IST.
+- **Phase I rubric:** IEEE report (10), prototype video under five minutes (15), GitHub (5).
+- **Phase II:** final IEEE report, continuing Git history and interview (70% of overall grading).
 
 ## Scope
 
@@ -14,7 +14,9 @@ This is a **Verilog branch predictor prototype** with a 2-bit Branch History Tab
 - `make test-p1`: 22/22 directed checks passed.
 - `make synth-p1`: generic Yosys synthesis succeeded; 192 generic cells in the reported hierarchy, 0 check problems.
 - `make demo`: one synthetic 32-branch trace; correct predictions 10 (always NT), 12 (1-bit), 15 (2-bit).
-- `make test-p1-extended` is supplied but its full run on the team's Mac is **not yet confirmed**.
+- `make test-p1-extended`: 184/184 checks passed on 3 November 2026.
+- `make test-p1-scoreboard`: 8,443 + 9,163 + 10,123 checks passed across 4-, 16-, and 32-entry configurations.
+- `make synth-p1-checked`: generic synthesis and design checks passed.
 - P2 BTB, P3 recovery, broader P4 tests, P5 full metrics and integrated top are **pending team implementation**.
 
 ## Mac setup
@@ -24,6 +26,8 @@ Install Icarus Verilog, Yosys and Surfer (Homebrew). In the project root:
 ```bash
 make test-p1
 make test-p1-extended
+make test-p1-scoreboard
+make verify-p1
 make demo
 make synth-p1
 surfer results/p1_bht.vcd
@@ -50,3 +54,19 @@ Read `docs/INTERFACES.md` first, then `docs/PROJECT_PLAN.md`, then your own guid
 - Put a public/accessible video link in `video/DEMO_LINK.md` and README; don't commit a large MP4 to Git.
 - Confirm every team member appears in the video and has substantive commits and a report contribution.
 - Submission form: https://docs.google.com/forms/d/e/1FAIpQLSc6Cx8OrOQLGj_X2ZMkyG5jc8mokq36mGRq2x8jGRNV1sbegA/viewform
+
+## P1 independent verification handoff (3 Nov 2026)
+
+See [P1 quickstart](docs/P1_QUICKSTART.md) and
+[P1 implementation/viva notes](docs/P1_IMPLEMENTATION_NOTES.md).
+The additional reference scoreboard tests `INDEX_BITS=2`, `4`, and `5`,
+including all 8 direction/state transitions per entry, randomized updates,
+reset priority, aliasing and concurrent lookup/update PCs.
+The two existing P1 RTL files were intentionally **left unchanged** from the
+22-check Mac-tested starting point. Extended tests and independent scoreboards **passed on Mac on 3 November 2026**.
+
+## Faculty alignment and team onboarding
+
+- [Faculty Project 5 and Phase I/II checklist](docs/FACULTY_REQUIREMENTS.md): completed evidence versus outstanding deliverables.
+- [Start here for all teammates](docs/TEAM_START_HERE.md): forking, cloning, assigned branches and integration requirements; no collaborator invitation required.
+- P1 is unit-verified. P2/P3 hardware integration, BEQ/BNE traces, target-specific timing, IEEE report and video are still pending. This is not a completed CPU.

@@ -1,0 +1,11 @@
+VCD info: dumpfile results/p1_extended.vcd opened for output.
+PASS: all 16 entries reset to 01
+PASS: complete state transitions and saturation on 16 entries
+PASS: independent entries
+PASS: update disabled
+PASS: intentional PC index aliasing
+PASS: separate lookup and update PCs
+PASS: same-entry read/update edge behavior
+PASS: reset priority over enabled update
+ALL EXTENDED P1 CHECKS PASSED (184 checks)
+testbench/tb_p1_extended.sv:146: $finish called at 1242000 (1ps)

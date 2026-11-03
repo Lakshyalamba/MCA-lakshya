@@ -1,0 +1,25 @@
+VCD info: dumpfile results/p1_bht.vcd opened for output.
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000104 state=01 predicted_taken=0
+PASS pc=00000108 state=01 predicted_taken=0
+PASS pc=00000100 state=10 predicted_taken=1
+PASS pc=00000100 state=11 predicted_taken=1
+PASS pc=00000100 state=11 predicted_taken=1
+PASS pc=00000100 state=10 predicted_taken=1
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000100 state=00 predicted_taken=0
+PASS pc=00000100 state=00 predicted_taken=0
+PASS pc=00000104 state=10 predicted_taken=1
+PASS pc=00000100 state=00 predicted_taken=0
+PASS pc=00000108 state=01 predicted_taken=0
+PASS pc=00000140 state=00 predicted_taken=0
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000140 state=01 predicted_taken=0
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000104 state=01 predicted_taken=0
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000104 state=10 predicted_taken=1
+PASS pc=00000100 state=01 predicted_taken=0
+PASS pc=00000104 state=01 predicted_taken=0
+ALL P1 CHECKS PASSED (22 checks)
+testbench/tb_p1_bht.sv:117: $finish called at 158000 (1ps)

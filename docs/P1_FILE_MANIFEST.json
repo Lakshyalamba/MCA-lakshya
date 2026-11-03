@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "date": "2026-11-03",
+  "scope": "P1 unit verification; core RTL unchanged",
+  "note": "Replaces package-era SHA hashes that became stale after documentation edits. For provenance use immutable Git commits and the original execution logs.",
+  "verification": {
+    "toolchain": "Icarus Verilog 13.0; Yosys 0.70+post on macOS",
+    "command": "make verify-p1",
+    "directed": 22,
+    "extended": 184,
+    "scoreboard_4_entry": 8443,
+    "scoreboard_16_entry": 9163,
+    "scoreboard_32_entry": 10123,
+    "total": 27935,
+    "evidence": "evidence/P1_20261103_185000/"
+  },
+  "files": [
+    "rtl/branch_history_table.v",
+    "rtl/predictor_2bit.v",
+    "testbench/tb_p1_bht.sv",
+    "testbench/tb_p1_extended.sv",
+    "testbench/tb_p1_scoreboard.sv",
+    "Makefile",
+    "scripts/capture_p1_evidence.sh"
+  ],
+  "exclusions": [
+    "No complete CPU or integrated BTB/flush claim",
+    "No measured CPI or target frequency"
+  ]
+}

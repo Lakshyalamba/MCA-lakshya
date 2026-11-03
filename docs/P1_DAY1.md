@@ -7,7 +7,7 @@ You own the 2-bit saturating counter and indexed BHT. Do **not** build a full CP
 3. Read `rtl/predictor_2bit.v`: it is a wrapper; `prediction_state[1]` is the direction prediction.
 4. Open `results/p1_bht.vcd` using Surfer and observe `clk`, `reset`, `lookup_pc`, `update_pc`, `actual_taken`, `update_valid`, `prediction_state`, `predict_taken`.
 5. Run `make synth-p1` once Yosys is available. Save the log; generic hardware synthesis is not equivalent to timing analysis.
-6. Commit these three files on `feature/p1-bht`; open a PR with your console PASS output and 1 waveform screenshot.
+6. This P1 milestone was published as PR #1 on `feature/shubhaang-bht`; see the current `docs/P1_IMPLEMENTATION_NOTES.md`. A real waveform screenshot remains to be committed.
 
 ## Signals you must be able to explain
 

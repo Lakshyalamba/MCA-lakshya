@@ -1,0 +1,4 @@
+P1 DIRECTED PASS: all 32 entries, 8 transitions per entry
+P1 RESET/ALIAS PASS: disabled updates and reset priority
+P1 SCOREBOARD PASS: INDEX_BITS=5, entries=32, cycles=4357, updates=3817, resets=17, checks=10123
+testbench/tb_p1_scoreboard.sv:205: $finish called at 44909000 (1ps)
