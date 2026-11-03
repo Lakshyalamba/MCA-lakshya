@@ -1,8 +1,8 @@
 # P1 — 2-bit Direction Predictor and Branch History Table
 
-**Owner:** Shubhaang (team leader)  
-**Project:** MCA Dynamic Branch Prediction Unit  
-**Scope:** Synthesizable direction-prediction RTL; not an entire CPU or target predictor.  
+**Owner:** Shubhaang (team leader)
+**Project:** MCA Dynamic Branch Prediction Unit
+**Scope:** Synthesizable direction-prediction RTL; not an entire CPU or target predictor.
 **Phase I deadline:** 16 November 2026, 11:59 PM IST.
 
 ## 1. Architecture and exact interface
@@ -103,18 +103,18 @@ path branches). The actual mispredicted-but-valid resolved branch *does* train.
 | Verification target | Test or evidence | Status |
 | --- | --- | --- |
 | Four-state increments/decrements, saturation, aliasing | `make test-p1` (22 checks) | **Passed on user's Mac, 22 Oct 2026** |
-| All 16 entries; reset priority; simultaneous fetch/update | `make test-p1-extended` (184 checks in supplied suite) | **Pending Mac rerun** |
-| Exhaustive 8 outcome/state combinations for each entry | `make test-p1-scoreboard` | **New; pending Mac RTL run** |
-| Deterministic randomized read/update/reset model checking | `make test-p1-scoreboard` (several thousand operations per configuration) | **New; pending Mac RTL run** |
-| Configurations `INDEX_BITS=2,4,5` | `make test-p1-scoreboard` | **New; pending Mac RTL run** |
-| Generic synthesis + consistency checking | `make synth-p1-checked` | **New; pending Mac Yosys run** |
+| All 16 entries; reset priority; simultaneous fetch/update | `make test-p1-extended` (184 checks in supplied suite) | **Passed: 184/184 on 3 Nov 2026** |
+| Exhaustive 8 outcome/state combinations for each entry | `make test-p1-scoreboard` | **Passed on Mac, 3 Nov 2026** |
+| Deterministic randomized read/update/reset model checking | `make test-p1-scoreboard` (several thousand operations per configuration) | **Passed on Mac, 3 Nov 2026** |
+| Configurations `INDEX_BITS=2,4,5` | `make test-p1-scoreboard` | **Passed on Mac, 3 Nov 2026** |
+| Generic synthesis + consistency checking | `make synth-p1-checked` | **Passed on Mac, 3 Nov 2026** |
 | Baseline generic synthesis | `make synth-p1` | **Previously passed on Mac: 192 generic cells, 0 reported problems** |
 
-The 184-check extended test and new scoreboard are **not claimed to have
-passed** until a real Icarus Verilog run succeeds. This handoff environment did
-not have `iverilog`, `vvp`, or `yosys`; the original two RTL files are
-intentionally preserved to avoid changing hardware that already passed the
-user's initial tests.
+On 3 November 2026, the extended tests and all three independent
+scoreboards passed on macOS using Icarus Verilog 13.0. Checked generic
+synthesis completed using Yosys 0.70. See
+`evidence/P1_20261103_185000/` for the recorded test logs.
+The previously verified RTL modules remain unchanged.
 
 ### Run locally on macOS
 
@@ -150,62 +150,62 @@ Capture the `01 → 10 → 11 → 10 → 01 → 00` sequence and the reset inter
 
 ## 7. Viva-ready explanations
 
-**Q1. What did you implement personally?**  
+**Q1. What did you implement personally?**
 The 16-entry, two-bit branch direction predictor and its verification
 contract: BHT indexing, saturating state updates, combinational prediction,
 reset semantics, and self-checking testcases.
 
-**Q2. What is a branch?**  
+**Q2. What is a branch?**
 A control-flow instruction whose next PC depends on a condition (BEQ/BNE);
 the processor doesn't know the outcome until the condition is evaluated.
 
-**Q3. Why predict?**  
+**Q3. Why predict?**
 To choose a speculative next PC before branch resolution and avoid waiting
 at every branch; wrong guesses require pipeline recovery.
 
-**Q4. Why 2 bits?**  
+**Q4. Why 2 bits?**
 The extra state provides hysteresis. A single unusual outcome weakens a strong
 prediction without immediately reversing it.
 
-**Q5. Why 16 entries?**  
+**Q5. Why 16 entries?**
 This small, parametrized teaching design makes every entry easy to verify.
 With 2 bits each, it uses 32 storage bits; the table size is not a performance
 optimum established by measurements.
 
-**Q6. Why PC[5:2]?**  
+**Q6. Why PC[5:2]?**
 The two lowest bits are zero for aligned 4-byte instructions; four more bits
 choose one of 16 counters.
 
-**Q7. Explain aliasing.**  
+**Q7. Explain aliasing.**
 PC=0x100 and PC=0x140 map to the same BHT entry, so their training history
 can collide. A tagless BHT can't tell them apart.
 
-**Q8. How does the BHT differ from the BTB?**  
+**Q8. How does the BHT differ from the BTB?**
 The BHT predicts direction; the BTB predicts destination address with
 valid/tag checking.
 
-**Q9. Why two PC ports?**  
+**Q9. Why two PC ports?**
 One branch is being fetched while an older branch may be resolving; those PCs
 can differ in a pipeline.
 
-**Q10. What if `update_valid=0`?**  
+**Q10. What if `update_valid=0`?**
 No counter changes on that edge. The actual outcome is irrelevant until a valid
 resolved branch enables training.
 
-**Q11. Does this implement a whole pipeline?**  
+**Q11. Does this implement a whole pipeline?**
 No. P1 supplies the direction predictor. P3 emulates/implements next-PC and
 misprediction recovery. The team must not claim a completed CPU.
 
-**Q12. Why isn't 2-bit always more accurate?**  
+**Q12. Why isn't 2-bit always more accurate?**
 Accuracy depends on branch patterns, initialization, table aliasing and
 training. For some alternating traces, a simple 2-bit predictor can do poorly.
 
-**Q13. What have you measured so far?**  
+**Q13. What have you measured so far?**
 The user's previously shared Mac logs report 22 passing directed checks,
 and generic Yosys synthesis yielding 192 generic cells. Additional scoreboard
 checks and timing/resource characterization still require new runs.
 
-**Q14. What is a meaningful performance comparison?**  
+**Q14. What is a meaningful performance comparison?**
 For each trace, count predictions before training, then compare always-NT,
 1-bit and 2-bit accuracy. P5 may estimate CPI with an explicitly assumed
 branch frequency and misprediction penalty; that is not a measured CPU CPI.
