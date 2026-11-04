@@ -1,0 +1,45 @@
+VCD info: dumpfile results/predictor.vcd opened for output.
+branch pc=00000100 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=10
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=0 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=0 two=1 state=10
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=0 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=0 two=1 state=10
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=0 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=0 two=1 state=10
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=1 baseline=0 one=1 two=1 state=11
+branch pc=00000100 actual=0 baseline=0 one=1 two=1 state=11
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+branch pc=00000104 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000104 actual=0 baseline=0 one=1 two=1 state=10
+TOTAL=32 BASE_CORRECT=10 ONE_CORRECT=12 TWO_CORRECT=15
+branch pc=00000100 actual=1 baseline=0 one=0 two=0 state=01
+branch pc=00000140 actual=1 baseline=0 one=1 two=1 state=10
+branch pc=00000140 actual=0 baseline=0 one=1 two=1 state=11
+
+=======================================================
+ tb_predictor Verification Summary
+   Total Checks:  113
+   Total Errors:  0
+=======================================================
+ALL TB_PREDICTOR CHECKS PASSED (113 checks)
+

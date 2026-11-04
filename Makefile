@@ -2,12 +2,16 @@ SHELL := /bin/bash
 IVERILOG ?= iverilog
 VVP ?= vvp
 YOSYS ?= yosys
+PYTHON ?= python3
 RTL = rtl/branch_history_table.v rtl/predictor_2bit.v rtl/predictor_1bit.v rtl/predictor_top.v
 P3_RTL = rtl/next_pc_mux.v rtl/branch_resolution.v
+P4_ALL_RTL = $(RTL) rtl/branch_target_buffer.v $(P3_RTL)
+
 .PHONY: help test test-p1 test-p1-extended test-p1-scoreboard verify-p1 demo synth-p1 synth-p1-checked clean
 .PHONY: test-p3 test-p3-integrated verify-p3 synth-p3-checked
+.PHONY: test-p4 test-p4-unit test-p4-comparison test-p4-oracle verify-p4 synth-p4-checked traces waveform-p4
 
-test: test-p1 test-p1-extended test-p1-scoreboard demo test-btb test-p3 test-p3-integrated
+test: test-p1 test-p1-extended test-p1-scoreboard demo test-btb test-p3 test-p3-integrated test-p4
 
 test-p1:
 	@mkdir -p results
@@ -33,14 +37,18 @@ clean:
 		results/btb_sim results/btb.vcd results/btb_test.log results/btb_param_* results/btb_synthesis_checked.log \
 		results/p3_control_sim results/p3_branch_control.vcd results/p3_control_test.log \
 		results/p3_integrated_sim results/p3_integrated.vcd results/p3_integrated_test.log \
-		results/p3_synthesis_checked.log
+		results/p3_synthesis_checked.log \
+		results/p4_comparison_sim results/p4_comparison.vcd results/p4_comparison_test.log \
+		results/p4_predictor_test.log results/p4_synthesis_checked.log
 
 help:
 	@echo "Core checks: make test-p1, make test-p1-extended, make demo, make synth-p1"
 	@echo "P3 checks:   make test-p3, make test-p3-integrated, make verify-p3"
-	@echo "make test runs directed, extended, independent scoreboard, demo, and P3 tests"
+	@echo "P4 checks:   make test-p4-unit, make test-p4-comparison, make test-p4, make verify-p4"
+	@echo "make test runs directed, extended, independent scoreboard, demo, P3, and P4 tests"
 	@echo "make verify-p1 adds checked generic synthesis to all P1 tests"
 	@echo "make verify-p3 adds checked generic synthesis to all P3 tests"
+	@echo "make verify-p4 adds checked generic synthesis to all P4 tests"
 
 test-p1-extended:
 	@mkdir -p results
@@ -101,4 +109,47 @@ synth-p3-checked:
 
 verify-p3: test-p3 test-p3-integrated synth-p3-checked
 	@echo "P3 VERIFICATION COMMANDS COMPLETED; inspect logs and preserve evidence."
+
+# ==============================================================================
+# P4 Baselines, Branch Traces and Verification Targets (Vansh)
+# ==============================================================================
+traces:
+	@mkdir -p traces
+	$(PYTHON) scripts/reference_predictors.py --generate-traces
+
+test-p4-unit:
+	@mkdir -p results
+	$(IVERILOG) -g2012 -Wall -s tb_predictor -o results/predictor_sim $(RTL) testbench/tb_predictor.v
+	@set -o pipefail; $(VVP) results/predictor_sim | tee results/p4_predictor_test.log
+
+test-p4-comparison: traces
+	@mkdir -p results evidence/metrics
+	$(IVERILOG) -g2012 -Wall -s tb_comparison -o results/p4_comparison_sim $(P4_ALL_RTL) testbench/tb_comparison.sv
+	@set -o pipefail; $(VVP) results/p4_comparison_sim | tee results/p4_comparison_test.log
+
+test-p4-oracle: traces
+	@mkdir -p evidence/metrics
+	$(PYTHON) scripts/reference_predictors.py --export-csv evidence/metrics/comparison_summary.csv
+
+test-p4: test-p4-unit test-p4-comparison test-p4-oracle
+
+synth-p4-checked:
+	@mkdir -p results
+	@$(YOSYS) -Q -T -l results/p4_synthesis_checked.log -p \
+	  'read_verilog rtl/predictor_1bit.v; synth -top predictor_1bit; check -assert; stat; \
+	   design -reset; \
+	   read_verilog rtl/predictor_1bit.v rtl/branch_history_table.v rtl/predictor_2bit.v rtl/predictor_top.v; synth -top predictor_top; check -assert; stat' > /dev/null
+	@echo "Checked generic synthesis for P4 completed; see results/p4_synthesis_checked.log"
+
+waveform-p4: test-p4-comparison
+	@mkdir -p evidence/waveforms
+	uv run --with matplotlib --with pillow --with numpy python3 scripts/render_p4_waveform.py
+
+verify-p4: test-p4 synth-p4-checked waveform-p4
+	@mkdir -p evidence/p4_logs
+	@cp -f results/p4_predictor_test.log evidence/p4_logs/ 2>/dev/null || true
+	@cp -f results/p4_comparison_test.log evidence/p4_logs/ 2>/dev/null || true
+	@cp -f results/p4_synthesis_checked.log evidence/p4_logs/ 2>/dev/null || true
+	@echo "P4 VERIFICATION COMMANDS COMPLETED; inspect logs and preserve evidence."
+
 

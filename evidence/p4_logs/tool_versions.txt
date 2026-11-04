@@ -1,0 +1,4 @@
+Icarus Verilog version 13.0 (stable) (v13_0)
+Yosys 0.70+post (git sha1 0c11ea098be065e585a90a06e7b7da49936cf231, Release, AppleClang clang++ 21.0.0.21000334)
+Darwin arm64
+Wed Nov  4 22:06:03 IST 2026

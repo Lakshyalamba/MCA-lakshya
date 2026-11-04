@@ -39,10 +39,10 @@
 - 2-bit predictor is not assumed to beat 1-bit on every possible trace; show counterexample if observed.
 
 ## Acceptance checklist
-- [ ] Repeatable traces and independently validated results CSV.
-- [ ] Testbench fails nonzero on mismatches.
-- [ ] Evidence includes representative loop and alternating cases.
-- [ ] PR has meaningful code authored by Vansh and clear explanations.
+- [x] Repeatable traces and independently validated results CSV (evidence/metrics/comparison_summary.csv).
+- [x] Testbench fails nonzero on mismatches (tb_comparison.sv & tb_predictor.v).
+- [x] Evidence includes representative loop and alternating cases (traces/ & evidence/waveforms/).
+- [x] PR has meaningful code authored by Vansh and clear explanations (feature/vansh-baselines-verification).
 
 ## Viva questions
 **Q: Why compare with always-not-taken?**
