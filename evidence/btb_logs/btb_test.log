@@ -1,0 +1,56 @@
+mkdir -p results
+iverilog -g2012 -Wall -s tb_btb -o results/btb_sim rtl/branch_target_buffer.v testbench/tb_btb.sv
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module branch_target_buffer declared here: rtl/branch_target_buffer.v:1
+vvp results/btb_sim
+VCD info: dumpfile results/btb.vcd opened for output.
+PASS: cold miss 0x100
+PASS: cold miss 0x140
+PASS: cold miss 0x000
+PASS: trained 0x100 hits, target 0x200
+PASS: other PC 0x104 misses
+PASS: alias 0x140 misses (tag differs)
+PASS: 0x140 replaces, hits 0x300
+PASS: 0x100 evicted by 0x140
+PASS: 0x104 independent
+PASS: 0x108 independent
+PASS: 0x140 untouched
+PASS: target updated to 0x350
+PASS: no update when update_valid=0
+PASS: same-cycle lookup sees old (miss)
+PASS: after clock edge it hits
+PASS: miss after reset 0x104
+PASS: miss after reset 0x110
+---- 17 passed, 0 failed ----
+ALL TESTS PASSED: 17 checks
+testbench/tb_btb.sv:84: $finish called at 192000 (1ps)
+for ib in 2 4 5; do \
+	  iverilog -g2012 -Wall -s tb_btb_param -P tb_btb_param.INDEX_BITS=$ib -o results/btb_param_$ib rtl/branch_target_buffer.v testbench/tb_btb_param.sv || exit 1; \
+	  vvp results/btb_param_$ib || exit 1; \
+	done
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module branch_target_buffer declared here: rtl/branch_target_buffer.v:1
+VCD info: dumpfile results/btb_param.vcd opened for output.
+---- IB=2 (4 entries): 23 passed, 0 failed ----
+ALL TESTS PASSED: 23 checks
+testbench/tb_btb_param.sv:123: $finish called at 331000 (1ps)
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module branch_target_buffer declared here: rtl/branch_target_buffer.v:1
+VCD info: dumpfile results/btb_param.vcd opened for output.
+---- IB=4 (16 entries): 59 passed, 0 failed ----
+ALL TESTS PASSED: 59 checks
+testbench/tb_btb_param.sv:123: $finish called at 601000 (1ps)
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module branch_target_buffer declared here: rtl/branch_target_buffer.v:1
+VCD info: dumpfile results/btb_param.vcd opened for output.
+---- IB=5 (32 entries): 107 passed, 0 failed ----
+ALL TESTS PASSED: 107 checks
+testbench/tb_btb_param.sv:123: $finish called at 981000 (1ps)
