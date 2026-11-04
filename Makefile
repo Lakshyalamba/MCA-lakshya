@@ -143,7 +143,7 @@ synth-p4-checked:
 
 waveform-p4: test-p4-comparison
 	@mkdir -p evidence/waveforms
-	uv run --with matplotlib --with pillow --with numpy python3 scripts/render_p4_waveform.py
+	@uv run --with matplotlib --with pillow --with numpy python3 scripts/render_p4_waveform.py 2>/dev/null || $(PYTHON) scripts/render_p4_waveform.py
 
 verify-p4: test-p4 synth-p4-checked waveform-p4
 	@mkdir -p evidence/p4_logs

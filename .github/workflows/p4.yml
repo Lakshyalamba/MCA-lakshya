@@ -1,0 +1,37 @@
+name: P4 verification
+
+on:
+  push:
+    branches: [main, feature/vansh-baselines-verification]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  p4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout PR commit
+        uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog, Yosys, and Python tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iverilog yosys python3 python3-pip
+          pip3 install --break-system-packages matplotlib pillow numpy || pip3 install matplotlib pillow numpy || true
+
+      - name: Run P4 verification suite and checked synthesis
+        run: make verify-p4
+
+      - name: Run full regression test suite
+        run: make test
+
+      - name: Upload logs if a step fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p4-verification-logs
+          path: results/*.log
+          if-no-files-found: ignore
