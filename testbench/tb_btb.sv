@@ -14,7 +14,7 @@ module tb_btb;
 
     task check(input cond, input [8*44-1:0] name);
         begin
-            if (cond) begin passes = passes + 1; $display("PASS: %0s", name); end
+            if (cond === 1'b1) begin passes = passes + 1; $display("PASS: %0s", name); end
             else begin fails = fails + 1; $display("FAIL: %0s (hit=%b target=%h)", name, hit, target); end
         end
     endtask

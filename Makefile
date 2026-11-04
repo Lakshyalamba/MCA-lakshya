@@ -59,3 +59,17 @@ synth-p1-checked:
 
 verify-p1: test-p1 test-p1-extended test-p1-scoreboard synth-p1-checked
 	@echo "P1 VERIFICATION COMMANDS COMPLETED; inspect logs and preserve evidence."
+
+.PHONY: test-btb synth-btb-checked
+test-btb:
+	mkdir -p results
+	iverilog -g2012 -Wall -s tb_btb -o results/btb_sim rtl/branch_target_buffer.v testbench/tb_btb.sv
+	vvp results/btb_sim
+	for ib in 2 4 5; do \
+	  iverilog -g2012 -Wall -s tb_btb_param -P tb_btb_param.INDEX_BITS=$$ib -o results/btb_param_$$ib rtl/branch_target_buffer.v testbench/tb_btb_param.sv || exit 1; \
+	  vvp results/btb_param_$$ib || exit 1; \
+	done
+
+synth-btb-checked:
+	mkdir -p results
+	yosys -Q -T -l results/btb_synthesis_checked.log -p 'read_verilog rtl/branch_target_buffer.v; synth -top branch_target_buffer; check -assert; stat'
