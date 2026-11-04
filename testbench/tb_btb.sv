@@ -78,7 +78,9 @@ module tb_btb;
         look(32'h110); check(!hit, "miss after reset 0x110");
 
         $display("---- %0d passed, %0d failed ----", passes, fails);
-        if (fails == 0) $display("ALL TESTS PASSED"); else $display("TESTS FAILED");
+        if (fails != 0)
+            $fatal(1, "BTB verification failed: %0d failures", fails);
+        $display("ALL TESTS PASSED: %0d checks", passes);
         $finish;
     end
 endmodule
