@@ -17,7 +17,11 @@ This is a **Verilog branch predictor prototype** with a 2-bit Branch History Tab
 - `make test-p1-extended`: 184/184 checks passed on 3 November 2026.
 - `make test-p1-scoreboard`: 8,443 + 9,163 + 10,123 checks passed across 4-, 16-, and 32-entry configurations.
 - `make synth-p1-checked`: generic synthesis and design checks passed.
-- P2 BTB, P3 recovery, broader P4 tests, P5 full metrics and integrated top are **pending team implementation**.
+- `make test-btb`: P2 tagged BTB unit and parameter sweeps verified (merged in PR #2).
+- `make test-p3`: 24/24 directed checks passed for next-PC mux and branch resolution.
+- `make test-p3-integrated`: 26/26 integration checks passed for P1 BHT + P2 BTB + P3 control pipeline harness.
+- `make verify-p3`: simulation (50/50 checks) and generic Yosys synthesis passed (0 errors; next_pc_mux 91 cells, branch_resolution 223 cells).
+- Broader P4 tests, P5 full metrics and integrated top are **pending team implementation**.
 
 ## Mac setup
 
@@ -28,6 +32,10 @@ make test-p1
 make test-p1-extended
 make test-p1-scoreboard
 make verify-p1
+make test-btb
+make test-p3
+make test-p3-integrated
+make verify-p3
 make demo
 make synth-p1
 surfer results/p1_bht.vcd
@@ -41,9 +49,9 @@ Read `docs/INTERFACES.md` first, then `docs/PROJECT_PLAN.md`, then your own guid
 
 | Person | Role | New work required |
 |---|---|---|
-| Shubhaang | P1: BHT and 2-bit prediction | Strengthen verification, document state/indexing, review integration |
-| Tanish | P2: tagged BTB | Implement valid/tag/target cache + tests |
-| Tanmay | P3: next-PC + resolution | Implement next-PC, mispredict/flush/redirect and integrated harness |
+| Shubhaang | P1: BHT and 2-bit prediction | Strengthen verification, document state/indexing, review integration (Merged PR #1) |
+| Tanish | P2: tagged BTB | Implement valid/tag/target cache + tests (Merged PR #2) |
+| Tanmay | P3: next-PC + resolution | Implement next-PC, mispredict/flush/redirect and integrated harness (Submitted PR #3, under review) |
 | Vansh | P4: baseline and verification | Extend 1-bit baseline testing; BEQ/BNE traces + independent comparison |
 | Lakshya | P5: synthesis, metrics and video | Automated synthesis + result analysis + final evidence and report assembly |
 

@@ -1,0 +1,60 @@
+VCD info: dumpfile results/p3_integrated.vcd opened for output.
+
+======== P3 Integration Tests: P1 BHT + P2 BTB + P3 Control ========
+
+--- T1: Cold start, branch at 0x1000, actually NT ---
+PASS [1]: T1-fetch: cold BHT=NT, BTB miss, npc=PC+4
+PASS [2]: T1-resolve: correct NT, no flush, selected_pc=predicted_next_pc
+
+--- T2: Train predictor taken, then correct prediction ---
+PASS [3]: T2-fetch: trained BHT=T, BTB hit, npc=target
+PASS [4]: T2-resolve: correct taken+target, no flush, selected_pc=target
+
+--- T3: Direction misprediction NT -> T ---
+PASS [5]: T3-fetch: cold BHT=NT, speculative npc=PC+4
+PASS [6]: T3-resolve: direction miss, redirect overrides speculative PC to target
+
+--- T4: Direction misprediction T -> NT ---
+PASS [7]: T4-fetch: trained BHT=T, speculative npc=target (0x2000)
+PASS [8]: T4-resolve: direction miss, redirect overrides speculative target to PC+4
+
+--- T5: Target misprediction (wrong BTB target) ---
+PASS [9]: T5-fetch: BHT=T, BTB hit target=0x4000, speculative npc=0x4000
+PASS [10]: T5-resolve: wrong target, redirect overrides predicted target with resolved target
+
+--- T6: BTB miss on taken branch (alias eviction) ---
+PASS [11]: T6-fetch: BHT=T but BTB miss (evicted), speculative fallback=PC+4
+PASS [12]: T6-resolve: BTB miss on taken => redirect recovers to actual target
+
+--- T7: Predictor adapts after misprediction ---
+PASS [13]: T7a: cold BHT=NT
+PASS [14]: T7b: after 1 taken update, BHT=T (state 10)
+PASS [15]: T7c: strongly taken, BTB hit, npc=target
+
+--- T8: Two distinct branches, no interference ---
+PASS [16]: T8a: branch A predicts taken (independent)
+PASS [17]: T8b: branch B predicts NT (independent)
+
+--- T9: Stable correct prediction ---
+PASS [18]: T9: stable taken+hit+correct target prediction
+
+--- T10: Reset clears all state ---
+PASS [19]: T10: after reset, BHT=NT and BTB miss on previously trained PC
+
+--- T11: Backward branch target (loop pattern) ---
+PASS [20]: T11-fetch: backward branch predicts taken to loop top
+PASS [21]: T11-resolve: correct backward branch, selected_pc=loop top, no flush
+
+--- T12: actual_next_pc for NT resolution ---
+PASS [22]: T12-fetch: BHT predicts taken
+PASS [23]: T12-resolve: NT actual => redirect overrides to branch_pc+4
+
+--- T13: Squashed/invalid branch resolution (res_valid=0) ---
+PASS [24]: T13-fetch: cold branch PC=0x1030, BHT=NT, BTB miss
+PASS [25]: T13-invalid: res_valid=0 asserts no recovery, selected_pc unchanged
+PASS [26]: T13-untrained: BHT state unchanged (01) and BTB untaught after invalid branch
+
+======== P3 Integration Results ========
+  26 passed, 0 failed out of 26 total checks
+ALL P3 INTEGRATION TESTS PASSED: 26 checks
+testbench/tb_integrated.sv:521: $finish called at 602000 (1ps)

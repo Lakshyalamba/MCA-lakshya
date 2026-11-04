@@ -1,0 +1,33 @@
+name: P3 verification
+
+on:
+  push:
+    branches: [main, feature/tanmay-control]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  p3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout PR commit
+        uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog and Yosys
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iverilog yosys
+
+      - name: Run P3 verification suite and checked synthesis
+        run: make verify-p3
+
+      - name: Upload logs if a step fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p3-verification-logs
+          path: results/*.log
+          if-no-files-found: ignore
