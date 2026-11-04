@@ -3,9 +3,11 @@ IVERILOG ?= iverilog
 VVP ?= vvp
 YOSYS ?= yosys
 RTL = rtl/branch_history_table.v rtl/predictor_2bit.v rtl/predictor_1bit.v rtl/predictor_top.v
+P3_RTL = rtl/next_pc_mux.v rtl/branch_resolution.v
 .PHONY: help test test-p1 test-p1-extended test-p1-scoreboard verify-p1 demo synth-p1 synth-p1-checked clean
+.PHONY: test-p3 test-p3-integrated verify-p3 synth-p3-checked
 
-test: test-p1 test-p1-extended test-p1-scoreboard demo
+test: test-p1 test-p1-extended test-p1-scoreboard demo test-p3 test-p3-integrated
 
 test-p1:
 	@mkdir -p results
@@ -27,12 +29,17 @@ clean:
 		results/p1_synthesis.log results/p1_extended_sim results/p1_extended.vcd \
 		results/p1_extended_test.log results/p1_synthesis_checked.log \
 		results/p1_scoreboard_2.log results/p1_scoreboard_4.log results/p1_scoreboard_5.log \
-		results/p1_scoreboard_2_sim results/p1_scoreboard_4_sim results/p1_scoreboard_5_sim
+		results/p1_scoreboard_2_sim results/p1_scoreboard_4_sim results/p1_scoreboard_5_sim \
+		results/p3_control_sim results/p3_branch_control.vcd results/p3_control_test.log \
+		results/p3_integrated_sim results/p3_integrated.vcd results/p3_integrated_test.log \
+		results/p3_synthesis_checked.log
 
 help:
 	@echo "Core checks: make test-p1, make test-p1-extended, make demo, make synth-p1"
-	@echo "make test runs directed, extended, independent scoreboard, and demo tests"
+	@echo "P3 checks:   make test-p3, make test-p3-integrated, make verify-p3"
+	@echo "make test runs directed, extended, independent scoreboard, demo, and P3 tests"
 	@echo "make verify-p1 adds checked generic synthesis to all P1 tests"
+	@echo "make verify-p3 adds checked generic synthesis to all P3 tests"
 
 test-p1-extended:
 	@mkdir -p results
@@ -73,3 +80,24 @@ test-btb:
 synth-btb-checked:
 	mkdir -p results
 	yosys -Q -T -l results/btb_synthesis_checked.log -p 'read_verilog rtl/branch_target_buffer.v; synth -top branch_target_buffer; check -assert; stat'
+
+# P3 Next-PC and branch resolution targets
+test-p3:
+	@mkdir -p results
+	$(IVERILOG) -g2012 -Wall -s tb_branch_control -o results/p3_control_sim rtl/next_pc_mux.v rtl/branch_resolution.v testbench/tb_branch_control.sv
+	@set -o pipefail; $(VVP) results/p3_control_sim | tee results/p3_control_test.log
+
+test-p3-integrated:
+	@mkdir -p results
+	$(IVERILOG) -g2012 -Wall -s tb_integrated -o results/p3_integrated_sim rtl/branch_history_table.v rtl/predictor_2bit.v rtl/branch_target_buffer.v rtl/next_pc_mux.v rtl/branch_resolution.v testbench/tb_integrated.sv
+	@set -o pipefail; $(VVP) results/p3_integrated_sim | tee results/p3_integrated_test.log
+
+synth-p3-checked:
+	@mkdir -p results
+	@$(YOSYS) -Q -T -l results/p3_synthesis_checked.log -p \
+	  'read_verilog rtl/next_pc_mux.v; synth -top next_pc_mux; check -assert; stat; read_verilog rtl/branch_resolution.v; synth -top branch_resolution; check -assert; stat' > /dev/null
+	@echo "Checked generic synthesis for P3 completed; see results/p3_synthesis_checked.log"
+
+verify-p3: test-p3 test-p3-integrated synth-p3-checked
+	@echo "P3 VERIFICATION COMMANDS COMPLETED; inspect logs and preserve evidence."
+
