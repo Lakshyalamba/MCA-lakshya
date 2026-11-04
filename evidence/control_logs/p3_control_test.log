@@ -1,0 +1,36 @@
+VCD info: dumpfile results/p3_branch_control.vcd opened for output.
+
+======== Part A: next_pc_mux tests ========
+PASS [1]: NPC-A1: NT prediction => PC+4
+PASS [2]: NPC-A2: Taken+BTB hit => predicted_target
+PASS [3]: NPC-A3: Taken+BTB miss => PC+4 fallback
+PASS [4]: NPC-A4: NT prediction ignores BTB hit, gives PC+4
+PASS [5]: NPC-A5: PC=0 with taken+hit => target
+PASS [6]: NPC-A6: near-max PC => wraps to FFFFFFFC
+PASS [7]: NPC-A7: Taken+hit target=0x0 => target 0x0
+
+======== Part B: branch_resolution tests ========
+PASS [8]: RES-B1: valid=0 => no recovery
+PASS [9]: RES-B2: pred NT, actual NT => no flush
+PASS [10]: RES-B3: pred T+hit+correct target, actual T => no flush
+PASS [11]: RES-B4: pred NT, actual T => flush, redirect to 0x2000
+PASS [12]: RES-B5: pred T, actual NT => flush, redirect to PC+4
+PASS [13]: RES-B6: pred T+BTB miss, actual T => redirect to actual target
+PASS [14]: RES-B7: pred T+hit+wrong target, actual T => flush+redirect
+
+======== Part C: Additional edge cases ========
+PASS [15]: RES-C1: pred NT+BTB hit, actual NT => no flush (hit irrelevant)
+PASS [16]: RES-C2: matching targets, taken correct => no mispredict
+PASS [17]: RES-C3: branch_pc=0, pred NT, actual T => redirect to target
+PASS [18]: RES-C4: branch_pc=0, pred T, actual NT => redirect to 0x4
+PASS [19]: RES-C5a: first resolution correct
+PASS [20]: RES-C5b: second resolution is mispredict
+PASS [21]: RES-C6a: first is direction mispredict
+PASS [22]: RES-C6b: second is correct NT
+PASS [23]: RES-C7: direction wrong overrides target match
+PASS [24]: RES-C8: NT->T mispredict even if target == PC+4
+
+======== P3 Branch Control Results ========
+  24 passed, 0 failed out of 24 total checks
+ALL P3 BRANCH CONTROL TESTS PASSED: 24 checks
+testbench/tb_branch_control.sv:264: $finish called at 24000 (1ps)
