@@ -10,9 +10,9 @@
 | Test Target | Testbench | Checks | Result | Log File |
 |---|---|:---:|:---:|---|
 | `make test-p3` | `testbench/tb_branch_control.sv` | 24 | ✅ **24/24 PASS** | `p3_control_test.log` |
-| `make test-p3-integrated` | `testbench/tb_integrated.sv` | 23 | ✅ **23/23 PASS** | `p3_integrated_test.log` |
+| `make test-p3-integrated` | `testbench/tb_integrated.sv` | 26 | ✅ **26/26 PASS** | `p3_integrated_test.log` |
 | `make synth-p3-checked` | `rtl/next_pc_mux.v`, `rtl/branch_resolution.v` | — | ✅ **0 problems** | `p3_synthesis_checked.log` |
-| **Total** | | **47** | ✅ **ALL PASS** | |
+| **Total** | | **50** | ✅ **ALL PASS** | |
 
 ## 2. Test Coverage Breakdown
 
@@ -38,9 +38,12 @@
   - Back-to-back correct/mispredict alternation
   - Direction wrong overriding target match
 
-### `tb_integrated.sv` (23 checks)
+### `tb_integrated.sv` (26 checks)
 - P1 BHT (`predictor_2bit`) + P2 BTB (`branch_target_buffer`) + P3 (`next_pc_mux`, `branch_resolution`)
-- Simulates realistic pipeline flow with metadata preservation at fetch time:
+- **Deterministic Sampling:** Samples all recovery signals (`sampled_mispredict`, `sampled_flush`, `sampled_redirect`, `sampled_redirect_pc`, `sampled_selected_pc`) while `res_valid=1`, eliminating simulator race conditions.
+- **Deactivation Verification:** Explicitly verifies that live recovery signals (`res_mispredict`, `res_flush`, `res_redirect`, `res_redirect_pc`) deactivate when `res_valid=0`.
+- **Redirect Priority:** Demonstrates `selected_pc = res_redirect ? res_redirect_pc : predicted_next_pc`, verifying recovery redirect overrides speculative fetch.
+- **Scenarios Tested:**
   - T1: Cold start NT branch (0x1000)
   - T2: Train taken + BTB, verify correct fetch redirect (0x1004)
   - T3: Direction misprediction NT → T with target redirect (0x1008)
@@ -53,6 +56,7 @@
   - T10: Reset clears all BHT/BTB state
   - T11: Backward branch target in loop pattern (0x1028 → 0x1000)
   - T12: Correct next PC computation for NT resolution (0x102C → 0x1030)
+  - T13: Squashed/invalid branch resolution (`res_valid=0`), confirming no recovery asserted and BHT/BTB states remain completely untaught.
 
 ## 3. Generic Synthesis Statistics (Yosys 0.70)
 
@@ -77,3 +81,7 @@
   - `$_XNOR_`: 27
   - `$_XOR_`: 28
 - Problems reported by `check -assert`: **0**
+
+## 4. Waveform Artifacts
+- `evidence/waveforms/p3_integrated_simulation.png`: Genuine simulation waveform generated directly from `results/p3_integrated.vcd`, displaying real simulation time axis (in ns/ps), digital signal transitions, and annotations for T2 (correct prediction), T3 (direction misprediction), and T4 (redirect to PC+4).
+- `evidence/waveforms/p3_control.png`: Conceptual timing diagram showing signal transitions across all truth-table scenarios.

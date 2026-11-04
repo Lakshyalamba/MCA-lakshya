@@ -19,8 +19,8 @@ This is a **Verilog branch predictor prototype** with a 2-bit Branch History Tab
 - `make synth-p1-checked`: generic synthesis and design checks passed.
 - `make test-btb`: P2 tagged BTB unit and parameter sweeps verified (merged in PR #2).
 - `make test-p3`: 24/24 directed checks passed for next-PC mux and branch resolution.
-- `make test-p3-integrated`: 23/23 integration checks passed for P1 BHT + P2 BTB + P3 control pipeline harness.
-- `make verify-p3`: simulation and generic Yosys synthesis passed (0 errors; next_pc_mux 91 cells, branch_resolution 223 cells).
+- `make test-p3-integrated`: 26/26 integration checks passed for P1 BHT + P2 BTB + P3 control pipeline harness.
+- `make verify-p3`: simulation (50/50 checks) and generic Yosys synthesis passed (0 errors; next_pc_mux 91 cells, branch_resolution 223 cells).
 - Broader P4 tests, P5 full metrics and integrated top are **pending team implementation**.
 
 ## Mac setup
@@ -51,7 +51,7 @@ Read `docs/INTERFACES.md` first, then `docs/PROJECT_PLAN.md`, then your own guid
 |---|---|---|
 | Shubhaang | P1: BHT and 2-bit prediction | Strengthen verification, document state/indexing, review integration (Merged PR #1) |
 | Tanish | P2: tagged BTB | Implement valid/tag/target cache + tests (Merged PR #2) |
-| Tanmay | P3: next-PC + resolution | Implement next-PC, mispredict/flush/redirect and integrated harness (Completed, PR ready) |
+| Tanmay | P3: next-PC + resolution | Implement next-PC, mispredict/flush/redirect and integrated harness (Submitted PR #3, under review) |
 | Vansh | P4: baseline and verification | Extend 1-bit baseline testing; BEQ/BNE traces + independent comparison |
 | Lakshya | P5: synthesis, metrics and video | Automated synthesis + result analysis + final evidence and report assembly |
 

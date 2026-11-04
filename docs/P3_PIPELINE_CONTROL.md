@@ -2,7 +2,7 @@
 
 **Author:** Tanmay (P3)
 **Date:** 4 November 2026
-**Status:** Unit-verified; integration with P1/P2 pending
+**Status:** P1+P2+P3 interface-level integration tested; physical pipeline registers and full CPU execution are not implemented.
 
 ## 1. Overview
 
@@ -169,8 +169,8 @@ Cycle N+1 (Resolution):
 | `tb_branch_control.sv` — next_pc_mux | 7 | ✅ PASS | `make test-p3` |
 | `tb_branch_control.sv` — resolution truth table | 7 | ✅ PASS | `make test-p3` |
 | `tb_branch_control.sv` — edge cases | 10 | ✅ PASS | `make test-p3` |
-| `tb_integrated.sv` — P1+P2+P3 workflow | 12 | ✅ PASS | `make test-p3-integrated` |
-| **Total** | **24 + 12** | **36 PASS** | |
+| `tb_integrated.sv` — P1+P2+P3 integration suite | 26 | ✅ PASS | `make test-p3-integrated` |
+| **Total** | **24 + 26** | **50 PASS** | `make verify-p3` |
 
 ## 8. Limitations and Scope
 
@@ -200,5 +200,5 @@ Cycle N+1 (Resolution):
 | `rtl/next_pc_mux.v` | RTL | Combinational next-PC selector |
 | `rtl/branch_resolution.v` | RTL | Misprediction detection and recovery signals |
 | `testbench/tb_branch_control.sv` | Test | 24 directed assertions for P3 modules |
-| `testbench/tb_integrated.sv` | Test | 12-check P1+P2+P3 integration harness |
+| `testbench/tb_integrated.sv` | Test | 26-check P1+P2+P3 integration harness |
 | `docs/P3_PIPELINE_CONTROL.md` | Doc | This document |

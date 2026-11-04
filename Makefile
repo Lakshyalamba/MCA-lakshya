@@ -7,7 +7,7 @@ P3_RTL = rtl/next_pc_mux.v rtl/branch_resolution.v
 .PHONY: help test test-p1 test-p1-extended test-p1-scoreboard verify-p1 demo synth-p1 synth-p1-checked clean
 .PHONY: test-p3 test-p3-integrated verify-p3 synth-p3-checked
 
-test: test-p1 test-p1-extended test-p1-scoreboard demo test-p3 test-p3-integrated
+test: test-p1 test-p1-extended test-p1-scoreboard demo test-btb test-p3 test-p3-integrated
 
 test-p1:
 	@mkdir -p results
@@ -30,6 +30,7 @@ clean:
 		results/p1_extended_test.log results/p1_synthesis_checked.log \
 		results/p1_scoreboard_2.log results/p1_scoreboard_4.log results/p1_scoreboard_5.log \
 		results/p1_scoreboard_2_sim results/p1_scoreboard_4_sim results/p1_scoreboard_5_sim \
+		results/btb_sim results/btb.vcd results/btb_test.log results/btb_param_* results/btb_synthesis_checked.log \
 		results/p3_control_sim results/p3_branch_control.vcd results/p3_control_test.log \
 		results/p3_integrated_sim results/p3_integrated.vcd results/p3_integrated_test.log \
 		results/p3_synthesis_checked.log

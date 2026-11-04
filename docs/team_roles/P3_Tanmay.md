@@ -42,9 +42,9 @@
 
 ## Acceptance checklist
 - [x] All branch-control truth-table cases pass (24/24 in tb_branch_control.sv).
-- [x] Integration tests demonstrate both correct fetch and recovery cases with saved metadata (23/23 in tb_integrated.sv).
+- [x] Integration tests demonstrate both correct fetch and recovery cases with saved metadata (26/26 in tb_integrated.sv).
 - [x] Flush/redirect timing and scope are clearly documented, without claiming full CPU execution (docs/P3_PIPELINE_CONTROL.md).
-- [x] PR passes review and has reproducible commands (make verify-p3).
+- [ ] PR passes review and has reproducible commands (PR #3 open, awaiting review approval).
 - [x] Generic synthesis and checks pass with 0 errors (91 cells for next_pc_mux, 223 for branch_resolution).
 
 ## Viva questions
