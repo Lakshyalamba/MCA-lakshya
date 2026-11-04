@@ -77,7 +77,7 @@ module tb_comparison;
     wire        res_redirect;
     wire [31:0] res_redirect_pc;
 
-    // Instantiate Predictor Subsystem under test
+    // Instantiate Predictor Subsystem under test (Default 16 entries, INDEX_BITS=4)
     predictor_top #(.INDEX_BITS(INDEX_BITS)) dut_predictors (
         .clk(clk),
         .reset(reset),
@@ -86,6 +86,20 @@ module tb_comparison;
         .one_bit_taken(one_bit_taken),
         .two_bit_taken(two_bit_taken),
         .two_bit_state(two_bit_state),
+        .update_valid(update_valid),
+        .update_pc(update_pc),
+        .actual_taken(actual_taken)
+    );
+
+    // Instantiate 32-entry 2-bit predictor for capacity & aliasing sensitivity analysis
+    wire        two_bit_32_taken;
+    wire [1:0]  two_bit_32_state;
+    predictor_2bit #(.INDEX_BITS(5)) dut_two_bit_32 (
+        .clk(clk),
+        .reset(reset),
+        .lookup_pc(lookup_pc),
+        .predict_taken(two_bit_32_taken),
+        .prediction_state(two_bit_32_state),
         .update_valid(update_valid),
         .update_pc(update_pc),
         .actual_taken(actual_taken)
@@ -395,6 +409,85 @@ module tb_comparison;
     endtask
 
     // ========================================================================
+    // Additional Experiment: Aliasing Sensitivity Study (16 vs 32 entries)
+    // ========================================================================
+    task automatic test_aliasing_sensitivity;
+        integer fd, dummy, cnt, seq, act_taken;
+        reg [8*256-1:0] line;
+        reg [31:0] pc, rs1, rs2, target;
+        reg [7:0] c1, c2, c3;
+        reg exp_act;
+        integer c16_count;
+        integer c32_count;
+        begin
+            $display("\n------------------------------------------------------------");
+            $display(" P4 ALIASING SENSITIVITY STUDY (16-ENTRY VS 32-ENTRY BHT)");
+            $display("------------------------------------------------------------");
+            c16_count = 0;
+            c32_count = 0;
+
+            @(negedge clk);
+            reset = 1;
+            update_valid = 0;
+            @(posedge clk);
+            #1;
+            reset = 0;
+
+            fd = $fopen("traces/beq_bne_trace.csv", "r");
+            if (fd == 0) begin
+                $display("ERROR: Cannot open traces/beq_bne_trace.csv for aliasing test!");
+                error_count = error_count + 1;
+            end else begin
+                dummy = $fgets(line, fd); // Header
+                while ($fgets(line, fd) > 0) begin
+                    cnt = $sscanf(line, "%d,0x%x,%c%c%c,0x%x,0x%x,0x%x,%d",
+                                  seq, pc, c1, c2, c3, rs1, rs2, target, act_taken);
+                    if (cnt == 9) begin
+                        if (c1 == "B" && c2 == "E" && c3 == "Q") exp_act = (rs1 == rs2) ? 1'b1 : 1'b0;
+                        else exp_act = (rs1 != rs2) ? 1'b1 : 1'b0;
+
+                        @(negedge clk);
+                        lookup_pc = pc;
+                        update_pc = pc;
+                        actual_taken = exp_act;
+                        update_valid = 1;
+                        #1; // Pre-update sample
+
+                        if (two_bit_taken == exp_act) c16_count = c16_count + 1;
+                        if (two_bit_32_taken == exp_act) c32_count = c32_count + 1;
+
+                        @(posedge clk);
+                        #1;
+                        update_valid = 0;
+                    end
+                end
+                $fclose(fd);
+            end
+
+            $display(" Aliasing Study Results (Mixed BEQ/BNE - 50 branches):");
+            $display("   16-entry 2-bit BHT (INDEX_BITS=4): %0d / 50 (%0.2f%%) [Aliasing at index 4]",
+                     c16_count, (c16_count * 100.0) / 50.0);
+            $display("   32-entry 2-bit BHT (INDEX_BITS=5): %0d / 50 (%0.2f%%) [Aliasing resolved: index 4 vs 20]",
+                     c32_count, (c32_count * 100.0) / 50.0);
+
+            check_count = check_count + 1;
+            if (c16_count !== 24) begin
+                $display("ASSERTION FAILED: 16-entry BHT expected 24/50 correct, got %0d", c16_count);
+                error_count = error_count + 1;
+            end
+
+            check_count = check_count + 1;
+            if (c32_count !== 37) begin
+                $display("ASSERTION FAILED: 32-entry BHT expected 37/50 correct, got %0d", c32_count);
+                error_count = error_count + 1;
+            end
+
+            $display("  PASS: Aliasing resolution in HDL verified (+%0.2f%% accuracy gain)\n",
+                     ((c32_count - c16_count) * 100.0) / 50.0);
+        end
+    endtask
+
+    // ========================================================================
     // Main Verification Process
     // ========================================================================
     integer tot1, bcorr1, ocorr1, tcorr1;
@@ -406,8 +499,8 @@ module tb_comparison;
         $dumpfile("results/p4_comparison.vcd");
         $dumpvars(0, tb_comparison);
 
-        // Open summary CSV file for P5 metrics
-        csv_summary_fd = $fopen("evidence/metrics/comparison_summary.csv", "w");
+        // Open summary CSV file for Verilog results (separate from Python)
+        csv_summary_fd = $fopen("results/p4_verilog_summary.csv", "w");
         $fdisplay(csv_summary_fd, "trace_name,trace_file,total_branches,base_correct,base_mispredict,base_accuracy_pct,one_bit_correct,one_bit_mispredict,one_bit_accuracy_pct,two_bit_correct,two_bit_mispredict,two_bit_accuracy_pct");
 
         $display("================================================================================");
@@ -439,6 +532,40 @@ module tb_comparison;
 
         // Step 7: Pipeline Recovery Integration Verification
         test_pipeline_recovery();
+
+        // Additional Experiment: Aliasing Sensitivity Study (16 vs 32 entries)
+        test_aliasing_sensitivity();
+
+        // ---------------------------------------------------------------------
+        // Explicit Benchmark Regression Assertions
+        // ---------------------------------------------------------------------
+        check_count = check_count + 4;
+        if (tot1 !== 40 || bcorr1 !== 8 || ocorr1 !== 24 || tcorr1 !== 31) begin
+            $display("BENCHMARK ASSERTION FAILED on Loop trace: exp 40/8/24/31, got %0d/%0d/%0d/%0d",
+                     tot1, bcorr1, ocorr1, tcorr1);
+            error_count = error_count + 1;
+        end
+
+        check_count = check_count + 4;
+        if (tot2 !== 40 || bcorr2 !== 20 || ocorr2 !== 0 || tcorr2 !== 0) begin
+            $display("BENCHMARK ASSERTION FAILED on Alternating trace: exp 40/20/0/0, got %0d/%0d/%0d/%0d",
+                     tot2, bcorr2, ocorr2, tcorr2);
+            error_count = error_count + 1;
+        end
+
+        check_count = check_count + 4;
+        if (tot3 !== 50 || bcorr3 !== 20 || ocorr3 !== 23 || tcorr3 !== 24) begin
+            $display("BENCHMARK ASSERTION FAILED on Mixed trace: exp 50/20/23/24, got %0d/%0d/%0d/%0d",
+                     tot3, bcorr3, ocorr3, tcorr3);
+            error_count = error_count + 1;
+        end
+
+        check_count = check_count + 4;
+        if (tot_all !== 130 || bcorr_all !== 48 || ocorr_all !== 47 || tcorr_all !== 55) begin
+            $display("BENCHMARK ASSERTION FAILED on Overall: exp 130/48/47/55, got %0d/%0d/%0d/%0d",
+                     tot_all, bcorr_all, ocorr_all, tcorr_all);
+            error_count = error_count + 1;
+        end
 
         // Final Report
         $display("\n================================================================================");

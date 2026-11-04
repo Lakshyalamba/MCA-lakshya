@@ -9,8 +9,9 @@
 - testbench/tb_predictor.v (starter demonstration; expand with assertions)
 - testbench/tb_comparison.sv (new independent self-checking comparison)
 - traces/loop_trace.csv, traces/alternating_trace.csv, traces/beq_bne_trace.csv (new reproducible inputs)
-- scripts/reference_predictors.py (new independent Python oracle, if useful)
-- docs/P4_TEST_PLAN.md (oracle rules, trace schema and coverage)
+- scripts/reference_predictors.py (independent Python oracle and trace validator)
+- scripts/compare_p4_results.py (independent reconciliation script between Verilog and Python)
+- docs/P4_TEST_PLAN.md (oracle rules, trace schema, hysteresis and aliasing proofs)
 
 ## Interface contract
 - Always-not-taken predicts 0 for every conditional branch.

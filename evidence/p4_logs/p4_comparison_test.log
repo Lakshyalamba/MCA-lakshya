@@ -40,6 +40,15 @@ VCD info: dumpfile results/p4_comparison.vcd opened for output.
   PASS: Direction Mispredict (T->NT) asserts Flush=1, Redirect=1 to PC+4 (0x00001004)
   PASS: Target Mispredict (T->T, Target 0x3000->0x5000) asserts Flush=1, Redirect=1 to Actual Target (0x00005000)
 
+------------------------------------------------------------
+ P4 ALIASING SENSITIVITY STUDY (16-ENTRY VS 32-ENTRY BHT)
+------------------------------------------------------------
+ Aliasing Study Results (Mixed BEQ/BNE - 50 branches):
+   16-entry 2-bit BHT (INDEX_BITS=4): 24 / 50 (48.00%) [Aliasing at index 4]
+   32-entry 2-bit BHT (INDEX_BITS=5): 37 / 50 (74.00%) [Aliasing resolved: index 4 vs 20]
+  PASS: Aliasing resolution in HDL verified (+26.00% accuracy gain)
+
+
 ================================================================================
  CONSOLIDATED BENCHMARK SUMMARY (130 dynamic branches)
 ================================================================================
@@ -47,8 +56,8 @@ VCD info: dumpfile results/p4_comparison.vcd opened for output.
    1-Bit BHT Predictor:         47 / 130 (36.15%)
    2-Bit BHT Predictor:         55 / 130 (42.31%)
 --------------------------------------------------------------------------------
- TOTAL ASSERTIONS EVALUATED: 523
+ TOTAL ASSERTIONS EVALUATED: 541
  TOTAL ASSERTION FAILURES:   0
 ================================================================================
-ALL P4 COMPARISON CHECKS PASSED (523 checks)
+ALL P4 COMPARISON CHECKS PASSED (541 checks)
 

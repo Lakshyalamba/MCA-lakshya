@@ -1,10 +1,10 @@
 # P4 Verification & Test Plan: Baseline Predictors, Branch Traces, and Comparative Evaluation
 
-**Module:** P4 — Baselines, Branch Traces and Verification  
-**Author:** Vansh (Roll No: P4)  
-**Project:** Dynamic Branch Prediction Subsystem (MCA Project #5)  
-**Date:** 4 November 2026  
-**Status:** Complete & Verified  
+**Module:** P4 — Baselines, Branch Traces and Verification
+**Author:** Vansh (Roll No: P4)
+**Project:** Dynamic Branch Prediction Subsystem (MCA Project #5)
+**Date:** 5 November 2026
+**Status:** Complete & Reconciled
 
 ---
 
@@ -14,11 +14,15 @@ The primary objective of P4 is to build an independent, reproducible, and self-c
 
 Key deliverables verified:
 1. **RTL Module:** Improved and parameterized 1-bit BHT predictor (`rtl/predictor_1bit.v`).
-2. **Predictor Top Demonstration:** Enhanced `testbench/tb_predictor.v` with 113 assertions verifying cold start, 32-branch benchmark, disabled updates, reset priority, and index aliasing.
-3. **Comparative Verification Suite:** Multi-trace self-checking testbench (`testbench/tb_comparison.sv`) with 523 assertions comparing Baseline (Always Not Taken), 1-bit BHT, and 2-bit BHT across identical dynamic instruction sequences.
-4. **Reproducible Trace Suite:** Deterministic benchmark traces with full architectural schemas (`traces/loop_trace.csv`, `traces/alternating_trace.csv`, `traces/beq_bne_trace.csv`).
+2. **Predictor Top Demonstration:** Enhanced `testbench/tb_predictor.v` with 113 assertions verifying cold start across 4 representative entries, 32-branch benchmark, disabled updates, reset priority, and index aliasing.
+3. **Comparative Verification Suite:** Multi-trace self-checking testbench (`testbench/tb_comparison.sv`) with 541 assertions comparing Baseline (Always Not Taken), 1-bit BHT, and 2-bit BHT across identical dynamic instruction sequences, plus 16 vs 32-entry capacity sensitivity.
+4. **Reproducible Trace Suite:** Deterministic benchmark traces with full architectural schemas (`traces/loop_trace.csv`, `traces/alternating_trace.csv`, `traces/beq_bne_trace.csv`) validated via `make check-traces`.
 5. **Independent Python Oracle:** Standalone behavioral simulator (`scripts/reference_predictors.py`) computing mathematical expected predictions and summary metrics for P5 synthesis and CPI analysis.
-6. **Pipeline Recovery Coordination:** Directed checks in `tb_comparison.sv` verifying execute-stage pipeline control signals (`mispredict`, `flush`, `redirect`, `redirect_pc`) on direction vs target mispredictions in coordination with P3.
+6. **Automated Reconciliation Audit:** Independent verification script (`scripts/compare_p4_results.py`) guaranteeing 100% agreement between Verilog HDL and Python oracle before publishing evidence.
+7. **Pipeline Recovery Coordination:** Directed checks in `tb_comparison.sv` verifying execute-stage pipeline control signals (`mispredict`, `flush`, `redirect`, `redirect_pc`) on direction vs target mispredictions in coordination with P3.
+
+> [!NOTE]
+> All accuracy evaluations reported in this project are derived from deterministic synthetic branch traces designed to expose specific microarchitectural behaviors (loops, alternations, aliasing). They do not represent generalized CPU benchmark workloads. Furthermore, Yosys synthesis results represent generic technology-independent gate cells and flip-flops, not target FPGA LUTs or physical maximum clock frequencies.
 
 ---
 
@@ -47,7 +51,7 @@ To ensure branch outcomes are derived from valid register states:
 - For `BNE` (Branch Not Equal):
   $$\text{actual\_taken} = (\text{rs1\_val} \neq \text{rs2\_val}) \; ? \; 1 : 0$$
 
-Both the SystemVerilog testbench (`tb_comparison.sv`) and the Python oracle (`reference_predictors.py`) assert this invariant on every cycle before presenting the branch to the predictor hardware.
+Both `tb_comparison.sv` and `reference_predictors.py` assert this invariant on every cycle before presenting the branch to the predictor hardware.
 
 ---
 
@@ -125,9 +129,20 @@ All three predictors are evaluated in parallel on the identical dynamic stream i
 
 ---
 
-## 5. Timing Protocol & Anti-Data-Leakage Guarantee
+## 5. Capacity & Aliasing Sensitivity Analysis
 
-A critical architectural pitfall in branch predictor verification is training on the resolved branch direction before sampling the speculative prediction for that same dynamic branch.
+To empirically isolate the impact of index aliasing, an additional experiment was integrated into both `tb_comparison.sv` and `reference_predictors.py` evaluating the identical 50-branch mixed BEQ/BNE trace under two BHT table sizes:
+- **16-Entry BHT (`INDEX_BITS = 4`):**
+  - Branch 1 (`0x1010`) and Branch 3 (`0x1050`) alias to entry 4.
+  - Correct predictions: **24 / 50 (48.00%)**.
+- **32-Entry BHT (`INDEX_BITS = 5`):**
+  - Branch 1 maps to entry 4 ($0\text{x}1010[6:2] = 4$), while Branch 3 maps to entry 20 ($0\text{x}1050[6:2] = 20$).
+  - Correct predictions: **37 / 50 (74.00%)**.
+- **Conclusion:** Doubling table capacity resolves the index conflict, providing a **+26.00 percentage point** accuracy improvement.
+
+---
+
+## 6. Timing Protocol & Anti-Data-Leakage Guarantee
 
 Our testbenches strictly enforce a two-phase protocol:
 1. **Phase 1: Combinational Pre-Update Sampling (`#1` after negedge clk)**
@@ -143,32 +158,22 @@ This guarantees mathematical zero data leakage.
 
 ---
 
-## 6. Pipeline Recovery Coordination (Step 7)
+## 7. Automated Test Matrix & Reconciliation Audit
 
-In coordination with P3 (Pipeline Control), `tb_comparison.sv` includes integrated checks proving:
-1. **Direction Misprediction (Predicted Taken $\implies$ Actual Not Taken):**
-   - Fetch: Predicts Taken, BTB hits with Target `0x00003000`. Next PC = `0x00003000`.
-   - Execute Resolution: Condition evaluates to Not Taken (`actual_taken = 0`).
-   - Control Output: `mispredict = 1`, `flush = 1`, `redirect = 1`, `redirect_pc = 0x00001004` (PC+4 sequential fallback).
-2. **Target Misprediction (Predicted Taken $\implies$ Actual Taken, Target Mismatch):**
-   - Fetch: Predicts Taken, BTB hits with Target `0x00003000`. Next PC = `0x00003000`.
-   - Execute Resolution: Condition evaluates to Taken (`actual_taken = 1`), but actual target is `0x00005000`.
-   - Control Output: `mispredict = 1`, `flush = 1`, `redirect = 1`, `redirect_pc = 0x00005000` (Architectural target).
-
----
-
-## 7. Automated Test Matrix & Results Summary
-
-| Test Target | Suite | Description | Checks | Errors | Result |
-|---|---|---|---|---|---|
-| `make test-p4-unit` | `tb_predictor.v` | 32-branch benchmark, cold-start, aliasing, reset priority | 113 | 0 | **PASS** |
-| `make test-p4-comparison` | `tb_comparison.sv` | 130 dynamic branches across 3 trace files + P3 recovery | 523 | 0 | **PASS** |
+| Test Target | Suite / Tool | Description | Checks | Errors | Result |
+|---|---|---|:---:|:---:|---|
+| `make check-traces` | Python Validator | Strict validation of committed trace schemas and opcodes | 130 | 0 | **PASS** |
+| `make test-p4-unit` | `tb_predictor.v` | 32-branch benchmark, cold-start (4 entries), aliasing, reset | 113 | 0 | **PASS** |
+| `make test-p4-comparison` | `tb_comparison.sv` | 130 branches across 3 traces + P3 recovery + 32-entry aliasing | 541 | 0 | **PASS** |
+| `make test-p4-oracle` | Python Oracle | Independent reference model simulation & benchmark assertions | 130 | 0 | **PASS** |
+| `make test-p4-compare` | Reconciliation Script | Verilog vs. Python reconciliation audit (exports final CSV) | 4 rows | 0 | **PASS** |
 | `make synth-p4-checked` | Yosys 0.70 | Formal assertion check on `predictor_1bit` & `predictor_top` | 0 problems | 0 | **PASS** |
+| **Total Automated Assertions** | | | **654 checks** | **0** | **PASS** |
 
 ### Benchmark Results Table (`evidence/metrics/comparison_summary.csv`)
 
 | Trace Name | Branches | Baseline Acc | 1-Bit Acc | 2-Bit Acc |
-|---|---|---|---|---|
+|---|:---:|:---:|:---:|:---:|
 | Loop-dominated (`TTTTN`) | 40 | 20.00% (8/40) | 60.00% (24/40) | **77.50% (31/40)** |
 | Strict Alternating (`TNTN`) | 40 | **50.00% (20/40)** | 0.00% (0/40) | 0.00% (0/40) |
 | Mixed BEQ/BNE Aliased | 50 | 40.00% (20/50) | 46.00% (23/50) | **48.00% (24/50)** |

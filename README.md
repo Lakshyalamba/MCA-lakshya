@@ -21,10 +21,12 @@ This is a **Verilog branch predictor prototype** with a 2-bit Branch History Tab
 - `make test-p3`: 24/24 directed checks passed for next-PC mux and branch resolution (merged in PR #3).
 - `make test-p3-integrated`: 26/26 integration checks passed for P1 BHT + P2 BTB + P3 control pipeline harness.
 - `make verify-p3`: simulation (50/50 checks) and generic Yosys synthesis passed (0 errors; next_pc_mux 91 cells, branch_resolution 223 cells).
-- `make test-p4-unit`: 113/113 checks passed for expanded predictor assertion harness.
-- `make test-p4-comparison`: 523/523 checks passed across 3 deterministic trace workloads (130 dynamic branches) with P3 recovery coordination.
-- `make test-p4-oracle`: independent Python reference model verifies 100% agreement with Verilog simulation and exports summary CSV.
-- `make verify-p4`: full P4 simulation suite (636 checks), Yosys checked synthesis (0 problems, 92 cells for 1-bit, 284 cells for top), and high-resolution waveform generation completed.
+- `make check-traces`: validates schemas, monotonic sequence numbers, and operand conditions on committed traces.
+- `make test-p4-unit`: 113/113 checks passed for expanded predictor assertion harness (cold start on 4 representative entries, 32-branch benchmark, reset priority, aliasing).
+- `make test-p4-comparison`: 541/541 checks passed across 3 deterministic trace workloads (130 dynamic branches), P3 recovery coordination, and 16 vs 32-entry capacity sensitivity (48% vs 74%).
+- `make test-p4-oracle`: independent Python reference model verifies 100% agreement with explicit benchmark regression assertions.
+- `make test-p4-compare`: automated reconciliation script guarantees Verilog simulation and Python oracle parity across all counts and fields before publishing evidence.
+- `make verify-p4`: full P4 simulation suite (654 checks), Yosys checked synthesis (0 problems, 92 cells for 1-bit, 284 cells for top), and dynamic VCD waveform generation completed.
 - P5 full automated metrics integration and final report assembly are **pending team implementation**.
 
 ## Mac setup
@@ -40,8 +42,11 @@ make test-btb
 make test-p3
 make test-p3-integrated
 make verify-p3
+make check-traces
 make test-p4-unit
 make test-p4-comparison
+make test-p4-oracle
+make test-p4-compare
 make verify-p4
 make test
 make demo

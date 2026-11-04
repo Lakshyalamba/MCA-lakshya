@@ -5,20 +5,14 @@ Author: Vansh (P4 — Baseline Predictors, Branch Traces and Verification)
 
 Renders genuine simulation waveform screenshot from results/p4_comparison.vcd.
 Matches the professional dark theme of modern digital waveform viewers (Surfer / GTKWave).
-Visualizes:
-  1. Clock & Lookup PC
-  2. Actual Branch Outcome (actual_taken)
-  3. Baseline Prediction (baseline_taken = 0)
-  4. 1-bit BHT Prediction (one_bit_taken)
-  5. 2-bit BHT Prediction (two_bit_taken) & Saturating State (two_bit_state: 00, 01, 10, 11)
-  6. Pipeline Control (predicted_next_pc, res_mispredict, res_redirect, res_redirect_pc)
 
-Specifically highlights the loop-exit behavior:
-  - Iteration 4: Loop exit (actual=0). Both 1-bit and 2-bit mispredict.
-    1-bit flips to 0. 2-bit decrements from 11 (Strongly Taken) to 10 (Weakly Taken).
-  - Iteration 5: Next loop invocation re-entry (actual=1).
-    1-bit predicts 0 (MISPREDICT - double penalty!).
-    2-bit predicts 1 (CORRECT - protected by 2-bit hysteresis!).
+Features:
+  - Dynamic VCD header resolution: parses $scope and $var definitions to resolve
+    signal identifiers at runtime rather than relying on hardcoded symbols.
+  - Verifies presence of all required signals and fails cleanly if any are missing.
+  - Visualizes loop-exit misprediction and 2-bit hysteresis protection on re-entry.
+  - Clearly labels simulation clock period (10 ns) as simulation timing rather than
+    an FPGA hardware frequency claim.
 """
 
 import os
@@ -30,32 +24,77 @@ vcd_path = 'results/p4_comparison.vcd'
 output_img = 'evidence/waveforms/p4_comparison.png'
 
 if not os.path.exists(vcd_path):
-    print(f"Error: {vcd_path} not found.")
+    print(f"Error: {vcd_path} not found. Run simulation first.", file=sys.stderr)
     sys.exit(1)
 
 with open(vcd_path, 'r') as f:
     lines = f.readlines()
 
-# Target signals from tb_comparison scope: (name, symbol, is_bus, color)
-target_vars = [
-    ('clk', '2', False, '#00ffcc'),
-    ('lookup_pc', '3', True, '#00d4ff'),
-    ('actual_taken', '.', False, '#33ff99'),
-    ('baseline_taken', '!', False, '#888888'),
-    ('one_bit_taken', ')', False, '#ffaa00'),
-    ('two_bit_taken', '"', False, '#33ccff'),
-    ('two_bit_state', '#', True, '#cc88ff'),
-    ('predicted_next_pc', '(', True, '#00ffaa'),
-    ('update_valid', '=', False, '#ffff00'),
-    ('res_mispredict', '&', False, '#ff3366'),
-    ('res_redirect', '%', False, '#ff3366'),
-    ('res_redirect_pc', '$', True, '#ff99bb'),
+# Required target signals from tb_comparison scope: (signal_name, is_bus, color)
+REQUIRED_SIGNALS = [
+    ('clk', False, '#00ffcc'),
+    ('lookup_pc', True, '#00d4ff'),
+    ('actual_taken', False, '#33ff99'),
+    ('baseline_taken', False, '#888888'),
+    ('one_bit_taken', False, '#ffaa00'),
+    ('two_bit_taken', False, '#33ccff'),
+    ('two_bit_state', True, '#cc88ff'),
+    ('predicted_next_pc', True, '#00ffaa'),
+    ('update_valid', False, '#ffff00'),
+    ('res_mispredict', False, '#ff3366'),
+    ('res_redirect', False, '#ff3366'),
+    ('res_redirect_pc', True, '#ff99bb'),
 ]
+
+# Dynamically parse VCD header declarations ($scope, $var, $upscope, $enddefinitions)
+symbol_map = {}
+scope_stack = []
+data_start_idx = 0
+
+for idx, line in enumerate(lines):
+    line = line.strip()
+    if not line:
+        continue
+    if line.startswith('$scope'):
+        parts = line.split()
+        if len(parts) >= 3:
+            scope_stack.append(parts[2])
+    elif line.startswith('$upscope'):
+        if scope_stack:
+            scope_stack.pop()
+    elif line.startswith('$var'):
+        parts = line.split()
+        if len(parts) >= 5:
+            sym = parts[3]
+            var_name = parts[4]
+            current_scope = ".".join(scope_stack)
+            if current_scope.endswith('tb_comparison') or 'tb_comparison' in scope_stack:
+                symbol_map[var_name] = sym
+    elif line.startswith('$enddefinitions'):
+        data_start_idx = idx + 1
+        break
+
+# Verify all required signals were resolved from the VCD header
+target_vars = []
+missing_signals = []
+for name, is_bus, color in REQUIRED_SIGNALS:
+    if name in symbol_map:
+        sym = symbol_map[name]
+        target_vars.append((name, sym, is_bus, color))
+    else:
+        missing_signals.append(name)
+
+if missing_signals:
+    print(f"ERROR: Missing required signals in VCD header: {missing_signals}", file=sys.stderr)
+    print(f"Discovered symbols in tb_comparison: {list(symbol_map.keys())}", file=sys.stderr)
+    sys.exit(1)
+
+print(f"[P4 Waveform] Successfully resolved {len(target_vars)} signals dynamically from VCD header.")
 
 transitions = {sym: [] for _, sym, _, _ in target_vars}
 current_time = 0
 
-for line in lines:
+for line in lines[data_start_idx:]:
     line = line.strip()
     if not line:
         continue
@@ -181,7 +220,7 @@ for i, (name, sym, is_bus, color) in enumerate(target_vars):
 # Formatting axes
 ax.set_xlim(t_min_ns - 12.0, t_max_ns + 1.0)
 ax.set_ylim(-0.8, n_sigs * y_spacing + 2.4)
-ax.set_xlabel("Simulation Time (ns) [1 cycle = 10 ns, 100 MHz reference]",
+ax.set_xlabel("Simulation Time (ns) [1 cycle = 10 ns simulation clock period; not a measured FPGA operating frequency]",
               color='#a0a6b8', fontsize=10, labelpad=8)
 ax.set_xticks(range(int(t_min_ns), int(t_max_ns) + 1, 5))
 ax.tick_params(axis='x', colors='#a0a6b8', labelsize=9)
