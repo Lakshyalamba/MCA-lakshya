@@ -36,3 +36,12 @@ Generic counts vary by tool version; retain version and hashes with each run.
 The final report, team recordings, hosted video and leader signoff need team input.
 Maximum operating frequency is still unmeasured; decide a device/constraints flow
 with the team or explicitly state that limitation in the report.
+
+## Maintainer review follow-up
+
+The original PR-head CI runs are now successful, including P5 synthesis and
+metrics. See [the review handoff](P5_REVIEW_HANDOFF.md) for tested commits, actual
+run links, artifact verification, timing prerequisites and the member-by-member
+report/recording requests. Check the latest head's CI again after new commits.
+The README scope now identifies the BTB as implemented. All three PRs remain
+under review; the final PDF, video and clean merged-main regression remain pending.

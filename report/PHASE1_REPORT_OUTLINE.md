@@ -46,3 +46,7 @@ Before exporting `Phase1_IEEE_Report.pdf`, reconcile synthesis results by tool
 version. Earlier P3 evidence and the new flattened P5 flow need not yield
 identical generic counts. Do not overwrite the original author evidence or
 present counts from different flows as a controlled hardware comparison.
+
+The [maintainer review handoff](../docs/P5_REVIEW_HANDOFF.md) lists the exact
+outstanding author details, section approvals and recordings required from each
+member. Collect those inputs before treating an assembled manuscript as final.

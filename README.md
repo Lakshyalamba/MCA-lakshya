@@ -7,7 +7,7 @@
 
 ## Scope
 
-This is a **Verilog branch predictor prototype** with a 2-bit Branch History Table, 1-bit and static baselines, planned tagged Branch Target Buffer, next-PC and branch-resolution control, and a trace-driven simulation harness. **It is not a complete pipelined CPU.**
+This is a **Verilog branch predictor prototype** with a 2-bit Branch History Table, 1-bit and static baselines, implemented tagged Branch Target Buffer, next-PC and branch-resolution control, and a trace-driven simulation harness. **It is not a complete pipelined CPU.**
 
 ## Verified starting point (22 Oct shared Mac log)
 
