@@ -1,0 +1,30 @@
+name: P5 generic synthesis
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthesis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: make synth-all
+      - name: Check failure propagation
+        run: |
+          if YOSYS=false bash scripts/synth_all.sh --summary results/must-not-exist.md; then
+            echo 'Expected nonzero exit for failed tool invocation' >&2
+            exit 1
+          fi
+          test ! -e results/must-not-exist.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p5-generic-synthesis
+          path: |
+            results/synthesis/
+            evidence/synthesis/summary.md

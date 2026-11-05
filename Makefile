@@ -161,3 +161,8 @@ verify-p4: test-p4 synth-p4-checked waveform-p4
 	@echo "P4 VERIFICATION COMMANDS COMPLETED; inspect logs and preserve evidence."
 
 
+
+# P5 generic resources: each RTL top is synthesized in isolation.
+.PHONY: synth-all
+synth-all:
+	YOSYS="$(YOSYS)" PYTHON="$(PYTHON)" bash scripts/synth_all.sh
