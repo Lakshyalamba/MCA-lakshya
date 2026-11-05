@@ -53,7 +53,15 @@ Lakshya added the reproducible synthesis driver, validated metrics/CPI collector
 deterministic comparison chart, focused regression checks, CI workflows,
 evaluation methodology section and report/video assembly handoff. P1–P4 retain
 authorship of their RTL, testbenches, trace generator, oracle and reconciler.
-Commit/PR links will be inserted after publication. The final report still
+Published contributions:
+[synthesis PR #5](https://github.com/S-h-u-b-h-1/MCA/pull/5),
+[metrics PR #6](https://github.com/S-h-u-b-h-1/MCA/pull/6), and
+[report/video handoff PR #7](https://github.com/S-h-u-b-h-1/MCA/pull/7).
+The initial authored commits are
+[`17c2e9e`](https://github.com/Lakshyalamba/MCA-lakshya/commit/17c2e9e6645774535cac366796b78ed7d6a0fb3a),
+[`af0fadc`](https://github.com/Lakshyalamba/MCA-lakshya/commit/af0fadc679f8fe05cde5d2af351111b3af1293e4), and
+[`0035d3a`](https://github.com/Lakshyalamba/MCA-lakshya/commit/0035d3a).
+The final report still
 requires all authors' review, and the video requires actual recordings and an
 accessible hosted link.
 

@@ -94,6 +94,11 @@ The two existing P1 RTL files were intentionally **left unchanged** from the
 
 ## P5 evaluation and submission handoff
 
+P5 contributions are open for review:
+[synthesis #5](https://github.com/S-h-u-b-h-1/MCA/pull/5),
+[metrics #6](https://github.com/S-h-u-b-h-1/MCA/pull/6), and
+[report/video handoff #7](https://github.com/S-h-u-b-h-1/MCA/pull/7).
+
 After merging the P5 synthesis and metrics PRs:
 
 ```bash
