@@ -11,6 +11,14 @@ P4_ALL_RTL = $(RTL) rtl/branch_target_buffer.v $(P3_RTL)
 .PHONY: test-p3 test-p3-integrated verify-p3 synth-p3-checked
 .PHONY: test-p4 test-p4-unit test-p4-comparison test-p4-oracle test-p4-compare verify-p4 synth-p4-checked check-traces traces waveform-p4
 
+# P5 metrics always refresh HDL/oracle reconciliation first.
+.PHONY: metrics test-p5-metrics
+metrics: test-p4-compare
+	$(PYTHON) scripts/collect_metrics.py
+
+test-p5-metrics:
+	$(PYTHON) -m unittest discover -s tests -p 'test_metrics.py' -v
+
 test: test-p1 test-p1-extended test-p1-scoreboard demo test-btb test-p3 test-p3-integrated test-p4
 
 test-p1:

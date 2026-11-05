@@ -1,0 +1,13 @@
+trace_name,trace_file,predictor,total_branches,correct,mispredict,accuracy_pct,misprediction_rate,illustrative_cpi
+Loop-dominated (TTTTN),traces/loop_trace.csv,Always NT,40,8,32,20.000000,0.800000000,1.480000
+Loop-dominated (TTTTN),traces/loop_trace.csv,1-bit,40,24,16,60.000000,0.400000000,1.240000
+Loop-dominated (TTTTN),traces/loop_trace.csv,2-bit,40,31,9,77.500000,0.225000000,1.135000
+Strict Alternating (TNTN),traces/alternating_trace.csv,Always NT,40,20,20,50.000000,0.500000000,1.300000
+Strict Alternating (TNTN),traces/alternating_trace.csv,1-bit,40,0,40,0.000000,1.000000000,1.600000
+Strict Alternating (TNTN),traces/alternating_trace.csv,2-bit,40,0,40,0.000000,1.000000000,1.600000
+Mixed BEQ/BNE Aliased,traces/beq_bne_trace.csv,Always NT,50,20,30,40.000000,0.600000000,1.360000
+Mixed BEQ/BNE Aliased,traces/beq_bne_trace.csv,1-bit,50,23,27,46.000000,0.540000000,1.324000
+Mixed BEQ/BNE Aliased,traces/beq_bne_trace.csv,2-bit,50,24,26,48.000000,0.520000000,1.312000
+Consolidated Overall,ALL_TRACES,Always NT,130,48,82,36.923077,0.630769231,1.378462
+Consolidated Overall,ALL_TRACES,1-bit,130,47,83,36.153846,0.638461538,1.383077
+Consolidated Overall,ALL_TRACES,2-bit,130,55,75,42.307692,0.576923077,1.346154
