@@ -1,0 +1,5 @@
+trace_name,trace_file,total_branches,base_correct,base_mispredict,base_accuracy_pct,one_bit_correct,one_bit_mispredict,one_bit_accuracy_pct,two_bit_correct,two_bit_mispredict,two_bit_accuracy_pct
+Loop-dominated (TTTTN),traces/loop_trace.csv,40,8,32,20.00,24,16,60.00,31,9,77.50
+Strict Alternating (TNTN),traces/alternating_trace.csv,40,20,20,50.00,0,40,0.00,0,40,0.00
+Mixed BEQ/BNE Aliased,traces/beq_bne_trace.csv,50,20,30,40.00,23,27,46.00,24,26,48.00
+Consolidated Overall,ALL_TRACES,130,48,82,36.92,47,83,36.15,55,75,42.31

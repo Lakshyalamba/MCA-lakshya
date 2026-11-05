@@ -1,0 +1,61 @@
+name: P4 verification
+
+on:
+  push:
+    branches: [main, feature/vansh-baselines-verification]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  p4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout PR commit
+        uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog, Yosys, and Python tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            iverilog \
+            yosys \
+            python3 \
+            python3-pip \
+            python3-matplotlib \
+            python3-numpy \
+            python3-pil
+
+      - name: Validate committed benchmark traces
+        run: make check-traces
+
+      - name: Run P4 unit testbench (113 assertions)
+        run: make test-p4-unit
+
+      - name: Run P4 comparison testbench (541 assertions)
+        run: make test-p4-comparison
+
+      - name: Run Python reference oracle
+        run: make test-p4-oracle
+
+      - name: Reconcile Verilog HDL and Python oracle parity
+        run: make test-p4-compare
+
+      - name: Run checked generic Yosys synthesis
+        run: make synth-p4-checked
+
+      - name: Render dynamic simulation waveform
+        run: make waveform-p4
+
+      - name: Run complete project regression suite (P1 + P2 + P3 + P4 + Demo)
+        run: make test
+
+      - name: Upload logs if a step fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p4-verification-logs
+          path: results/*.log
+          if-no-files-found: ignore
