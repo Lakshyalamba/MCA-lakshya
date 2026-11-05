@@ -18,3 +18,31 @@ Suggested primary sources to consult:
 - T.-Y. Yeh and Y. N. Patt, “Two-Level Adaptive Training Branch Prediction,” Proc. MICRO, pp. 51–61, 1991, doi:10.1145/123465.123475.
 
 Official templates: https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/authoring-tools-and-templates/
+
+## Assembly handoff for 5 November 2026
+
+P1–P4 are merged through PR #4. P5 synthesis, metrics and submission-integration
+changes are being proposed separately; include their files after those PRs merge.
+The final IEEE PDF is still pending author review and formatting.
+
+| Section | Author or reviewer | Source and remaining action |
+| --- | --- | --- |
+| Title and affiliations | All five; leader assembles | Confirm full names, rolls and affiliations |
+| Abstract and Introduction | Leader; all review | Describe the branch-predictor prototype and verified scope |
+| Literature Review | Vansh and leader | Review `P4_REPORT_SECTION.md`; read cited papers and qualify general claims before submission |
+| Proposed Architecture: BHT | Shubhaang | `docs/P1_IMPLEMENTATION_NOTES.md`; obtain author's final prose |
+| Proposed Architecture: BTB | Tanish | `docs/P2_BTB_DESIGN.md`; obtain author's final prose |
+| Proposed Architecture: control | Tanmay | `P3_REPORT_SECTION.md`; preserve authored section and request review |
+| Verification | Vansh | `P4_REPORT_SECTION.md`; preserve HDL/oracle attribution |
+| Evaluation methodology | Lakshya | `P5_REPORT_SECTION.md`, generated accuracy, assumptions and generic synthesis summary |
+| Individual Contributions | Each member; leader verifies | Link actual commits/PRs after merge; do not attribute P1–P4 RTL to P5 |
+| References | All section authors | Verify each cited claim against its primary source; unify numbering |
+
+Use [IEEE's conference template guidance](https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/authoring-tools-and-templates/)
+for the final Word or LaTeX file. The official guidance provides both formats;
+this outline remains an assembly aid, not a submission-ready report.
+
+Before exporting `Phase1_IEEE_Report.pdf`, reconcile synthesis results by tool
+version. Earlier P3 evidence and the new flattened P5 flow need not yield
+identical generic counts. Do not overwrite the original author evidence or
+present counts from different flows as a controlled hardware comparison.
