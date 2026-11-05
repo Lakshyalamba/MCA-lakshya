@@ -146,10 +146,7 @@ test-p4: test-p4-unit test-p4-comparison test-p4-oracle test-p4-compare
 
 synth-p4-checked:
 	@mkdir -p results
-	@$(YOSYS) -Q -T -l results/p4_synthesis_checked.log -p \
-	  'read_verilog rtl/predictor_1bit.v; synth -top predictor_1bit; check -assert; stat; \
-	   design -reset; \
-	   read_verilog rtl/predictor_1bit.v rtl/branch_history_table.v rtl/predictor_2bit.v rtl/predictor_top.v; synth -top predictor_top; check -assert; stat' > /dev/null
+	@$(YOSYS) -Q -T -l results/p4_synthesis_checked.log -p 'read_verilog rtl/predictor_1bit.v; synth -top predictor_1bit; check -assert; stat; design -reset; read_verilog rtl/predictor_1bit.v rtl/branch_history_table.v rtl/predictor_2bit.v rtl/predictor_top.v; synth -top predictor_top; check -assert; stat' > /dev/null
 	@echo "Checked generic synthesis for P4 completed; see results/p4_synthesis_checked.log"
 
 waveform-p4: test-p4-comparison
